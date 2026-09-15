@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
 [ext_resource type="PackedScene" path="res://world/NPC/npc.tscn" id="3"]
 [ext_resource type="Resource" path="res://narrative/Characters/gaspard.tres" id="4"]
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_gaspard_intro.tres" id="5"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_gaspard_suite.tres" id="6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.45, 0.6, 0.82, 1)
@@ -106,6 +107,7 @@ position = Vector3(0, 0.1, -22)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8)
 character_data = ExtResource("4")
 dialogue = ExtResource("5")
+dialogue_variants = [ExtResource("6")]
 
 [node name="ToRuines" type="Area3D" parent="."]
 position = Vector3(-10, 1, 27)

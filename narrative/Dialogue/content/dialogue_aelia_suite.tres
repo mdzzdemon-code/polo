@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_e6f3t"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_l55uu"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_j30xf"]
+
+[sub_resource type="Resource" id="Resource_7k6st"]
+script = ExtResource("1_e6f3t")
+line_id = &"suite"
+speaker = "Aelia"
+text = "Je dois te dire quelque chose, et je veux que tu l'entendes clairement : si quelqu'un décide que tu es une menace à éliminer, je ne discuterai pas avec lui. Je ne discute jamais deux fois."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"aelia/suite_vue"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_l55uu")]([])
+
+[resource]
+script = ExtResource("3_j30xf")
+id = &"aelia_suite"
+start_line_id = &"suite"
+lines = Array[ExtResource("1_e6f3t")]([SubResource("Resource_7k6st")])
+required_flags = Array[StringName]([&"event/aelia_devotion_revealed"])
+forbidden_flags = Array[StringName]([&"aelia/suite_vue"])

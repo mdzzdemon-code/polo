@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Quests/quest_data.gd" id="1_e5e1w"]
+
+[resource]
+script = ExtResource("1_e5e1w")
+id = &"quest_jouet_tom"
+title = "Le jouet perdu"
+summary = "Tom a perdu son cheval de bois quelque part au village."
+giver_character_id = &"tom"
+available_from_day = 1
+available_until_day = 3
+available_from_hour = 0
+available_until_hour = 24
+required_flags = Array[StringName]([])
+failure_flags = Array[StringName]([])
+reward_memory_id = &""
+reward_item_ids = Array[StringName]([])

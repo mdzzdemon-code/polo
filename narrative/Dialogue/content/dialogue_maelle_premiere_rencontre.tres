@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=20 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_ijmsq"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_qd5em"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_4kwo3"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_px08a"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_sb3eh"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_36i0c"]
 
-[sub_resource type="Resource" id="Resource_pwosh"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_fm18d"]
+script = ExtResource("2_sb3eh")
 text = "Un éclat de lumière ?"
 target_line_id = &"explique_fragment"
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_plkax"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_swt6c"]
+script = ExtResource("2_sb3eh")
 text = "Je viens d'arriver, désolé."
 target_line_id = &"pas_vu"
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_ed1lf"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_4e6a7"]
+script = ExtResource("1_px08a")
 line_id = &"intro"
 speaker = "Maëlle"
 text = "Oh ! Je ne m'attendais pas à croiser quelqu'un ici... Tu n'as pas vu un éclat de lumière tomber par ici ? Je le cherche depuis ce matin."
@@ -46,10 +46,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_qd5em")]([SubResource("Resource_pwosh"), SubResource("Resource_plkax")])
+choices = Array[ExtResource("2_sb3eh")]([SubResource("Resource_fm18d"), SubResource("Resource_swt6c")])
 
-[sub_resource type="Resource" id="Resource_x726t"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_fr5c6"]
+script = ExtResource("1_px08a")
 line_id = &"explique_fragment"
 speaker = "Maëlle"
 text = "Oui ! Un fragment magique, il réagit à... enfin, à des choses particulières. C'est pour mon apprentissage. Attends... tu dégages quelque chose d'étrange."
@@ -62,10 +62,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &"reaction_fragment"
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_t0bk7"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_b0td2"]
+script = ExtResource("1_px08a")
 line_id = &"pas_vu"
 speaker = "Maëlle"
 text = "Pas grave, je vais continuer à chercher. Au fait, moi c'est Maëlle !"
@@ -78,10 +78,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &"reaction_fragment"
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_gnx2m"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_qmbq6"]
+script = ExtResource("1_px08a")
 line_id = &"reaction_fragment"
 speaker = "Maëlle"
 text = "(Le fragment dans sa poche se met à vibrer et à scintiller faiblement.) ...Tu as vu ça ?"
@@ -94,10 +94,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = true
 auto_next_line_id = &"propose_village"
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_kmqi4"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_6nm7q"]
+script = ExtResource("2_sb3eh")
 text = "D'accord, allons-y."
 target_line_id = &"accepte"
 required_flags = Array[StringName]([])
@@ -110,8 +110,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_rrhu1"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_tdvr7"]
+script = ExtResource("2_sb3eh")
 text = "Je préfère explorer un peu par ici d'abord."
 target_line_id = &"refuse"
 required_flags = Array[StringName]([])
@@ -124,8 +124,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_q3rw3"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_gw3ia"]
+script = ExtResource("2_sb3eh")
 text = "Qu'est-ce que tu crains exactement ?"
 target_line_id = &"curiosite"
 required_flags = Array[StringName]([])
@@ -138,8 +138,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_bf8ac"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_bs55m"]
+script = ExtResource("1_px08a")
 line_id = &"propose_village"
 speaker = "Maëlle"
 text = "Je ne sais pas ce que c'est, mais je n'aime pas ça. Il y a un chevalier au village, Victor, il pourrait nous aider à comprendre. Tu viens avec moi ?"
@@ -152,10 +152,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_qd5em")]([SubResource("Resource_kmqi4"), SubResource("Resource_rrhu1"), SubResource("Resource_q3rw3")])
+choices = Array[ExtResource("2_sb3eh")]([SubResource("Resource_6nm7q"), SubResource("Resource_tdvr7"), SubResource("Resource_gw3ia")])
 
-[sub_resource type="Resource" id="Resource_b6oi1"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_axjr2"]
+script = ExtResource("1_px08a")
 line_id = &"accepte"
 speaker = "Maëlle"
 text = "Parfait, suis-moi quand tu veux, je ne suis pas loin."
@@ -168,10 +168,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_agw1u"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_83qd8"]
+script = ExtResource("1_px08a")
 line_id = &"refuse"
 speaker = "Maëlle"
 text = "Comme tu veux ! Je resterai dans le coin un moment."
@@ -184,10 +184,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_kywpa"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_lso33"]
+script = ExtResource("1_px08a")
 line_id = &"curiosite"
 speaker = "Maëlle"
 text = "Je crains de ne jamais savoir. Comprendre vaut mieux que fuir, tu ne crois pas ?"
@@ -200,10 +200,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &"propose_village_2"
-choices = Array[ExtResource("2_qd5em")]([])
+choices = Array[ExtResource("2_sb3eh")]([])
 
-[sub_resource type="Resource" id="Resource_crx70"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_qedju"]
+script = ExtResource("2_sb3eh")
 text = "D'accord, allons-y."
 target_line_id = &"accepte"
 required_flags = Array[StringName]([])
@@ -216,8 +216,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_l87cv"]
-script = ExtResource("2_qd5em")
+[sub_resource type="Resource" id="Resource_dpb5a"]
+script = ExtResource("2_sb3eh")
 text = "Pas tout de suite."
 target_line_id = &"refuse"
 required_flags = Array[StringName]([])
@@ -230,8 +230,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_dt3ax"]
-script = ExtResource("1_ijmsq")
+[sub_resource type="Resource" id="Resource_oh5nb"]
+script = ExtResource("1_px08a")
 line_id = &"propose_village_2"
 speaker = "Maëlle"
 text = "Bref. Tu viens au village avec moi ?"
@@ -244,12 +244,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_qd5em")]([SubResource("Resource_crx70"), SubResource("Resource_l87cv")])
+choices = Array[ExtResource("2_sb3eh")]([SubResource("Resource_qedju"), SubResource("Resource_dpb5a")])
 
 [resource]
-script = ExtResource("3_4kwo3")
+script = ExtResource("3_36i0c")
 id = &"dialogue_maelle_premiere_rencontre"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_ijmsq")]([SubResource("Resource_ed1lf"), SubResource("Resource_x726t"), SubResource("Resource_t0bk7"), SubResource("Resource_gnx2m"), SubResource("Resource_bf8ac"), SubResource("Resource_b6oi1"), SubResource("Resource_agw1u"), SubResource("Resource_kywpa"), SubResource("Resource_dt3ax")])
+lines = Array[ExtResource("1_px08a")]([SubResource("Resource_4e6a7"), SubResource("Resource_fr5c6"), SubResource("Resource_b0td2"), SubResource("Resource_qmbq6"), SubResource("Resource_bs55m"), SubResource("Resource_axjr2"), SubResource("Resource_83qd8"), SubResource("Resource_lso33"), SubResource("Resource_oh5nb")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_cp6jk"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_mj0bc"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_ogvfp"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_j7l43"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_80cpe"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_uoqgt"]
 
-[sub_resource type="Resource" id="Resource_hug5j"]
-script = ExtResource("2_mj0bc")
+[sub_resource type="Resource" id="Resource_aa60s"]
+script = ExtResource("2_80cpe")
 text = "On se connaît ?"
 target_line_id = &"esquive"
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_86yd8"]
-script = ExtResource("2_mj0bc")
+[sub_resource type="Resource" id="Resource_rc818"]
+script = ExtResource("2_80cpe")
 text = "(Ne rien dire.)"
 target_line_id = &"silence"
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_bielt"]
-script = ExtResource("1_cp6jk")
+[sub_resource type="Resource" id="Resource_on7f7"]
+script = ExtResource("1_j7l43")
 line_id = &"intro"
 speaker = "Eléna"
 text = "Tiens donc. Toujours en train de te chercher, à ce que je vois."
@@ -46,10 +46,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_mj0bc")]([SubResource("Resource_hug5j"), SubResource("Resource_86yd8")])
+choices = Array[ExtResource("2_80cpe")]([SubResource("Resource_aa60s"), SubResource("Resource_rc818")])
 
-[sub_resource type="Resource" id="Resource_ycu5k"]
-script = ExtResource("1_cp6jk")
+[sub_resource type="Resource" id="Resource_ydf7e"]
+script = ExtResource("1_j7l43")
 line_id = &"esquive"
 speaker = "Eléna"
 text = "Disons que j'ai une bonne mémoire pour les visages. Même ceux qui changent. Ne te fais pas d'idées, ce n'est pas de l'amitié."
@@ -62,10 +62,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_mj0bc")]([])
+choices = Array[ExtResource("2_80cpe")]([])
 
-[sub_resource type="Resource" id="Resource_m6nx6"]
-script = ExtResource("1_cp6jk")
+[sub_resource type="Resource" id="Resource_d5kdg"]
+script = ExtResource("1_j7l43")
 line_id = &"silence"
 speaker = "Eléna"
 text = "Sage réflexe. Garde-le."
@@ -78,12 +78,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_mj0bc")]([])
+choices = Array[ExtResource("2_80cpe")]([])
 
 [resource]
-script = ExtResource("3_ogvfp")
+script = ExtResource("3_uoqgt")
 id = &"elena_intro"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_cp6jk")]([SubResource("Resource_bielt"), SubResource("Resource_ycu5k"), SubResource("Resource_m6nx6")])
+lines = Array[ExtResource("1_j7l43")]([SubResource("Resource_on7f7"), SubResource("Resource_ydf7e"), SubResource("Resource_d5kdg")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

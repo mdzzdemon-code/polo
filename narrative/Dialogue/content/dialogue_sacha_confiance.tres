@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_dn25p"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_sm4vp"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_32v77"]
+
+[sub_resource type="Resource" id="Resource_ydeat"]
+script = ExtResource("2_sm4vp")
+text = "Ça doit être difficile."
+target_line_id = &""
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"sacha/confiance_partagee"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = true
+
+[sub_resource type="Resource" id="Resource_kkncj"]
+script = ExtResource("2_sm4vp")
+text = "(Curiosité) Qu'est-ce que tu as envie de faire, toi, si tu pouvais choisir ?"
+target_line_id = &"ouverture_profonde"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &"curiosite"
+ends_dialogue = false
+
+[sub_resource type="Resource" id="Resource_ckjhd"]
+script = ExtResource("1_dn25p")
+line_id = &"ouverture"
+speaker = "Sacha"
+text = "Tu sais... c'est mes parents. Ils se disputent tout le temps en ce moment. Je sais pas trop quoi faire, alors je fais style que ça me touche pas."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_sm4vp")]([SubResource("Resource_ydeat"), SubResource("Resource_kkncj")])
+
+[sub_resource type="Resource" id="Resource_gyewi"]
+script = ExtResource("1_dn25p")
+line_id = &"ouverture_profonde"
+speaker = "Sacha"
+text = "...Partir, je crois. Loin. Mais je dis ça et j'ai même pas le courage de sortir de ma chambre certains jours. Alors bon."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"sacha/confiance_partagee", &"sacha/confiance_profonde"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_sm4vp")]([])
+
+[resource]
+script = ExtResource("3_32v77")
+id = &"sacha_confiance"
+start_line_id = &"ouverture"
+lines = Array[ExtResource("1_dn25p")]([SubResource("Resource_ckjhd"), SubResource("Resource_gyewi")])
+required_flags = Array[StringName]([&"sacha/relation/calme"])
+forbidden_flags = Array[StringName]([&"sacha/confiance_partagee"])

@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
+[ext_resource type="Script" path="res://combat/Traumas/trauma_spawner.gd" id="3"]
+[ext_resource type="Resource" path="res://combat/Traumas/poids_du_silence.tres" id="4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.55, 0.55, 0.65, 1)
@@ -105,6 +107,12 @@ rotation_degrees = Vector3(0, -90, 0)
 [node name="PlayerSpawn_FromMontagne" type="Marker3D" parent="."]
 position = Vector3(0, 0.1, -24)
 rotation_degrees = Vector3(0, 180, 0)
+
+[node name="PoidsDuSilenceSpawner" type="Node3D" parent="."]
+position = Vector3(0, 0, -4)
+script = ExtResource("3")
+trauma_data = ExtResource("4")
+required_flags = [&"quest/aider_le_chevalier/completed"]
 
 [node name="ToPlaines" type="Area3D" parent="."]
 position = Vector3(26, 1, 0)

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="TraumaData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_q6oal"]
+[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_eu3kf"]
 
 [resource]
-script = ExtResource("1_q6oal")
+script = ExtResource("1_eu3kf")
 id = &"peur_muette"
 display_name = "La Peur Muette"
 symbolism = "Une silhouette qui recule sans cesse mais qui frappe dès qu'on s'approche trop vite — la peur qu'on tente de fuir finit par se retourner contre soi."

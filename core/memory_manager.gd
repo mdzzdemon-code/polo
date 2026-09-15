@@ -8,10 +8,19 @@ signal memory_recovered(memory_id: StringName)
 signal memory_revealed(memory_id: StringName)
 
 var known_memories: Dictionary = {} # memory_id -> MemoryData, the full registry (ContentRegistry fills this)
+var possessed_memories: Array[StringName] = [] # memories the Anomaly currently holds — this is what the Carnet renders
 var lost_memories: Array[StringName] = []
 var revealed_memories: Array[StringName] = [] # true_text has been unlocked for these
 
-const STARTING_MEMORY_IDS: Array[StringName] = [] # set by story content once real memories exist
+## The Anomaly starts with artificially-provided memories that are actually
+## false (GDD §1) — everything else is earned through play.
+const STARTING_MEMORY_IDS: Array[StringName] = [&"souvenir_enfance_fausse"]
+
+
+func _ready() -> void:
+	for id in STARTING_MEMORY_IDS:
+		if not (id in possessed_memories):
+			possessed_memories.append(id)
 
 
 func register_memory(memory: MemoryData) -> void:
@@ -19,12 +28,14 @@ func register_memory(memory: MemoryData) -> void:
 
 
 func lose_memory(memory_id: StringName) -> void:
-	if memory_id in known_memories and not (memory_id in lost_memories):
+	if memory_id in possessed_memories and not (memory_id in lost_memories):
 		lost_memories.append(memory_id)
 		memory_lost.emit(memory_id)
 
 
 func recover_memory(memory_id: StringName) -> void:
+	if not (memory_id in possessed_memories):
+		possessed_memories.append(memory_id)
 	lost_memories.erase(memory_id)
 	memory_recovered.emit(memory_id)
 	EventManager.set_flag("memory/%s/recovered" % memory_id)
@@ -62,7 +73,7 @@ func persist_across_loop() -> void:
 
 func sacrifice_random_memory() -> StringName:
 	var candidates: Array = []
-	for id in known_memories.keys():
+	for id in possessed_memories:
 		if not (id in lost_memories):
 			candidates.append(id)
 	if candidates.is_empty():

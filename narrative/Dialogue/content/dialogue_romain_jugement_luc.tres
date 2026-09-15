@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_6eucc"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_ebypi"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_vnru1"]
+
+[sub_resource type="Resource" id="Resource_1hv0x"]
+script = ExtResource("2_ebypi")
+text = "Luc n'est pas lui-même en ce moment. Laisse-le tranquille."
+target_line_id = &""
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"luc/defended"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &"quest_sauver_luc"
+required_keyword_tag = &""
+ends_dialogue = true
+
+[sub_resource type="Resource" id="Resource_mg5s3"]
+script = ExtResource("2_ebypi")
+text = "Un vol est un vol. Fais ton travail."
+target_line_id = &""
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"luc/condemned"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = true
+
+[sub_resource type="Resource" id="Resource_de5ho"]
+script = ExtResource("1_6eucc")
+line_id = &"jugement"
+speaker = "Romain"
+text = "On m'a rapporté quelque chose au sujet de Luc. Je ne veux pas croire qu'il ait replongé, mais je ne peux pas non plus l'ignorer. Qu'en penses-tu, toi qui le connais peut-être mieux que moi ?"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_ebypi")]([SubResource("Resource_1hv0x"), SubResource("Resource_mg5s3")])
+
+[resource]
+script = ExtResource("3_vnru1")
+id = &"romain_jugement_luc"
+start_line_id = &"jugement"
+lines = Array[ExtResource("1_6eucc")]([SubResource("Resource_de5ho")])
+required_flags = Array[StringName]([&"event/luc_relapse_confessed"])
+forbidden_flags = Array[StringName]([&"luc/defended", &"luc/condemned"])

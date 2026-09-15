@@ -18,5 +18,6 @@ func trigger_glitch(glitch_id: StringName) -> void:
 func increase_degradation(amount: int = 1) -> void:
 	degradation_level += amount
 	degradation_level_changed.emit(degradation_level)
+	EventManager.set_flag("reality/degradation_%d" % degradation_level)
 	if degradation_level >= CRITICAL_DEGRADATION_LEVEL:
 		EventManager.set_flag(&"reality/degradation_critical")

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_hq1d2"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_txpgx"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_0hku6"]
+
+[sub_resource type="Resource" id="Resource_ncymj"]
+script = ExtResource("1_hq1d2")
+line_id = &"suite"
+speaker = "Eléna"
+text = "Tu as l'air d'en savoir un peu plus qu'avant. Ça se voit, tu sais — à la façon dont tu me regardes maintenant. Ne t'inquiète pas. Je ne suis pas pressée que tu te souviennes de tout."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"elena/suite_vue"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_txpgx")]([])
+
+[resource]
+script = ExtResource("3_0hku6")
+id = &"elena_suite"
+start_line_id = &"suite"
+lines = Array[ExtResource("1_hq1d2")]([SubResource("Resource_ncymj")])
+required_flags = Array[StringName]([&"event/aelia_devotion_revealed"])
+forbidden_flags = Array[StringName]([&"elena/suite_vue"])

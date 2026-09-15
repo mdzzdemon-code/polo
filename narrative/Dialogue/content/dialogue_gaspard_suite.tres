@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_8td4s"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_hqhkw"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_j6s5u"]
+
+[sub_resource type="Resource" id="Resource_mp5ts"]
+script = ExtResource("1_8td4s")
+line_id = &"suite"
+speaker = "Gaspard"
+text = "Tu es encore là. Bien. Je vais te dire une chose que je n'ai dite à personne : la nuit où j'ai compris que je me trompais, quelqu'un d'autre a disparu à ma place. Je n'ai jamais su qui. Ni pourquoi."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"gaspard/suite_vu"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_hqhkw")]([])
+
+[resource]
+script = ExtResource("3_j6s5u")
+id = &"gaspard_suite"
+start_line_id = &"suite"
+lines = Array[ExtResource("1_8td4s")]([SubResource("Resource_mp5ts")])
+required_flags = Array[StringName]([&"time/day_2", &"event/gaspard_met"])
+forbidden_flags = Array[StringName]([&"gaspard/suite_vu"])

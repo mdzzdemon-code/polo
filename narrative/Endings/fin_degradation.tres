@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="EndingData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://narrative/Endings/ending_data.gd" id="1_n1lad"]
+[ext_resource type="Script" path="res://narrative/Endings/ending_data.gd" id="1_e805x"]
 
 [resource]
-script = ExtResource("1_n1lad")
+script = ExtResource("1_e805x")
 id = &"fin_degradation"
 title = "Fin — Trop tard"
 description = "Le monde s'est effondré avant que l'Anomalie n'ait pu comprendre ce qu'elle était censée faire. La boucle recommence, mais quelque chose d'essentiel a déjà été perdu — et cette fois, il ne reste presque rien à sauver."

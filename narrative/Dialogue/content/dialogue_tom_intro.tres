@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_eckeh"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_87y6a"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_u0v68"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_xofe1"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_ifr64"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_q1ayc"]
 
-[sub_resource type="Resource" id="Resource_bfbrd"]
-script = ExtResource("2_87y6a")
+[sub_resource type="Resource" id="Resource_5plj1"]
+script = ExtResource("2_ifr64")
 text = "Parfois, oui."
 target_line_id = &"reponse_oui"
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_83opl"]
-script = ExtResource("2_87y6a")
+[sub_resource type="Resource" id="Resource_0rwht"]
+script = ExtResource("2_ifr64")
 text = "Non, jamais."
 target_line_id = &"reponse_non"
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_mitjt"]
-script = ExtResource("1_eckeh")
+[sub_resource type="Resource" id="Resource_pdy8m"]
+script = ExtResource("1_xofe1")
 line_id = &"intro"
 speaker = "Tom"
 text = "Hé, toi ! Est-ce que ça t'arrive d'oublier des choses importantes, comme si elles n'avaient jamais existé ?"
@@ -46,10 +46,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_87y6a")]([SubResource("Resource_bfbrd"), SubResource("Resource_83opl")])
+choices = Array[ExtResource("2_ifr64")]([SubResource("Resource_5plj1"), SubResource("Resource_0rwht")])
 
-[sub_resource type="Resource" id="Resource_ox045"]
-script = ExtResource("1_eckeh")
+[sub_resource type="Resource" id="Resource_kpgkw"]
+script = ExtResource("1_xofe1")
 line_id = &"reponse_oui"
 speaker = "Tom"
 text = "Moi aussi parfois ! Mais mes parents disent que ça revient toujours. C'est vrai, ça, dis ?"
@@ -61,11 +61,11 @@ grants_keyword_id = &""
 starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
-auto_next_line_id = &""
-choices = Array[ExtResource("2_87y6a")]([])
+auto_next_line_id = &"objet_perdu"
+choices = Array[ExtResource("2_ifr64")]([])
 
-[sub_resource type="Resource" id="Resource_7qm0i"]
-script = ExtResource("1_eckeh")
+[sub_resource type="Resource" id="Resource_k08c0"]
+script = ExtResource("1_xofe1")
 line_id = &"reponse_non"
 speaker = "Tom"
 text = "Chanceux ! Moi j'ai oublié le nom de mon chat pendant toute une journée une fois. C'était horrible."
@@ -77,13 +77,29 @@ grants_keyword_id = &""
 starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
+auto_next_line_id = &"objet_perdu"
+choices = Array[ExtResource("2_ifr64")]([])
+
+[sub_resource type="Resource" id="Resource_te4vo"]
+script = ExtResource("1_xofe1")
+line_id = &"objet_perdu"
+speaker = "Tom"
+text = "Au fait ! Tu n'aurais pas vu mon cheval en bois quelque part ? Je l'ai perdu près des maisons et je n'arrive pas à remettre la main dessus."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &"quest_jouet_tom"
+completes_quest_id = &""
+triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_87y6a")]([])
+choices = Array[ExtResource("2_ifr64")]([])
 
 [resource]
-script = ExtResource("3_u0v68")
+script = ExtResource("3_q1ayc")
 id = &"tom_intro"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_eckeh")]([SubResource("Resource_mitjt"), SubResource("Resource_ox045"), SubResource("Resource_7qm0i")])
+lines = Array[ExtResource("1_xofe1")]([SubResource("Resource_pdy8m"), SubResource("Resource_kpgkw"), SubResource("Resource_k08c0"), SubResource("Resource_te4vo")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

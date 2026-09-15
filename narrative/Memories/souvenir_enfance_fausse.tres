@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Memories/memory_data.gd" id="1_cfy4u"]
+
+[resource]
+script = ExtResource("1_cfy4u")
+id = &"souvenir_enfance_fausse"
+display_name = "Un jardin"
+carnet_anomalie_text = "Je me souviens d'un jardin, d'un rire, d'une main qui tenait la mienne. C'était calme. C'était chez moi."
+true_text = "Il n'y a jamais eu de jardin. Ce souvenir a été placé là, comme les autres, pour que je ne pose pas de questions."
+is_false_memory = true
+source_hint = "La vérité se trouve peut-être du côté des ruines anciennes."
+unlocks_ability = &""

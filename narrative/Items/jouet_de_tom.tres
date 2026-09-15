@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://player/item_data.gd" id="1_ot07u"]
+
+[resource]
+script = ExtResource("1_ot07u")
+id = &"jouet_de_tom"
+display_name = "Jouet en bois de Tom"
+kind = 1
+stackable = false
+persists_across_loops = false
+placeholder_color = Color(0.8, 0.6, 0.3, 1)
+description = "Un petit cheval de bois usé. Tom le cherche partout."

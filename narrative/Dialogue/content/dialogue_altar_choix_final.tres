@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_ixamc"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_pid3j"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_id55y"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_irw2s"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_x3nbv"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_y2clc"]
 
-[sub_resource type="Resource" id="Resource_vjj48"]
-script = ExtResource("2_pid3j")
+[sub_resource type="Resource" id="Resource_dx6cb"]
+script = ExtResource("2_x3nbv")
 text = "Accepter — disparaître pour que tout le reste continue."
 target_line_id = &""
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = true
 
-[sub_resource type="Resource" id="Resource_m1nft"]
-script = ExtResource("2_pid3j")
+[sub_resource type="Resource" id="Resource_j5oo2"]
+script = ExtResource("2_x3nbv")
 text = "Refuser. Pas comme ça. Pas encore."
 target_line_id = &""
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = true
 
-[sub_resource type="Resource" id="Resource_hquw8"]
-script = ExtResource("1_ixamc")
+[sub_resource type="Resource" id="Resource_i24p1"]
+script = ExtResource("1_irw2s")
 line_id = &"choix_final"
 speaker = ""
 text = "(L'autel réagit enfin à ta présence. Tu comprends, sans qu'on te l'explique, ce qu'il attend de toi.)"
@@ -46,12 +46,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_pid3j")]([SubResource("Resource_vjj48"), SubResource("Resource_m1nft")])
+choices = Array[ExtResource("2_x3nbv")]([SubResource("Resource_dx6cb"), SubResource("Resource_j5oo2")])
 
 [resource]
-script = ExtResource("3_id55y")
+script = ExtResource("3_y2clc")
 id = &"altar_choix_final"
 start_line_id = &"choix_final"
-lines = Array[ExtResource("1_ixamc")]([SubResource("Resource_hquw8")])
+lines = Array[ExtResource("1_irw2s")]([SubResource("Resource_i24p1")])
 required_flags = Array[StringName]([&"event/aelia_devotion_revealed"])
 forbidden_flags = Array[StringName]([])

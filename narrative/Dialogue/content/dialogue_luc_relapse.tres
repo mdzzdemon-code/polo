@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_qwr44"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_k3iix"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_sml0d"]
+
+[sub_resource type="Resource" id="Resource_2mmpg"]
+script = ExtResource("1_qwr44")
+line_id = &"relapse"
+speaker = "Luc"
+text = "...Je ne sais pas ce qui s'est passé cette nuit. Je me suis réveillé avec quelque chose entre les mains qui n'était pas à moi. Un glitch, je crois. Mais essaie d'expliquer ça à quelqu'un qui ne l'a pas vécu."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/luc_relapse_confessed"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &"quest_sauver_luc"
+completes_quest_id = &""
+triggers_glitch = true
+auto_next_line_id = &"relapse_suite"
+choices = Array[ExtResource("2_k3iix")]([])
+
+[sub_resource type="Resource" id="Resource_xeavd"]
+script = ExtResource("1_qwr44")
+line_id = &"relapse_suite"
+speaker = "Luc"
+text = "Si Romain l'apprend, je suis fini. Pas à cause de ce que j'ai fait — à cause de ce que j'ai été."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_k3iix")]([])
+
+[resource]
+script = ExtResource("3_sml0d")
+id = &"luc_relapse"
+start_line_id = &"relapse"
+lines = Array[ExtResource("1_qwr44")]([SubResource("Resource_2mmpg"), SubResource("Resource_xeavd")])
+required_flags = Array[StringName]([&"time/day_2"])
+forbidden_flags = Array[StringName]([&"luc/defended", &"luc/condemned"])

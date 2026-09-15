@@ -14,6 +14,7 @@ signal died
 @export var schedule_hours: Array[int] = [] # start hour for each marker, same length
 @export var move_speed: float = 2.5
 @export var gravity: float = 18.0
+@export var dies_on_flag: StringName # optional — a narrative consequence can kill this PNJ directly
 
 @onready var body_mesh: Node3D = $BodyMesh
 var health: float
@@ -27,6 +28,16 @@ func _ready() -> void:
 		mat.albedo_color = character_data.placeholder_color
 		var mesh_instance: MeshInstance3D = body_mesh.get_node("MeshInstance3D")
 		mesh_instance.set_surface_override_material(0, mat)
+	if dies_on_flag != &"":
+		if EventManager.has_flag(dies_on_flag):
+			die()
+		else:
+			EventManager.flag_changed.connect(_on_flag_changed)
+
+
+func _on_flag_changed(flag: StringName, value: bool) -> void:
+	if flag == dies_on_flag and value and not is_dead:
+		die()
 
 
 func _physics_process(delta: float) -> void:

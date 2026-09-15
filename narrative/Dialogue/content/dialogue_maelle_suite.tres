@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_lhrbm"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_1w5si"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_v6min"]
+
+[sub_resource type="Resource" id="Resource_i8urj"]
+script = ExtResource("1_lhrbm")
+line_id = &"suite"
+speaker = "Maëlle"
+text = "Je repense souvent à notre rencontre, tu sais. Je ne sais toujours pas ce que tu es. Mais je sais que je suis contente que le fragment m'ait menée jusqu'à toi, quoi qu'il arrive après."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"maelle/suite_vue"])
+grants_item_id = &""
+grants_keyword_id = &"curiosite"
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_1w5si")]([])
+
+[resource]
+script = ExtResource("3_v6min")
+id = &"maelle_suite"
+start_line_id = &"suite"
+lines = Array[ExtResource("1_lhrbm")]([SubResource("Resource_i8urj")])
+required_flags = Array[StringName]([&"quest/aider_le_chevalier/completed"])
+forbidden_flags = Array[StringName]([&"maelle/suite_vue"])

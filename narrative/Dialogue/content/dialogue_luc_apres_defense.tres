@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_rh655"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_871al"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_dn1j7"]
+
+[sub_resource type="Resource" id="Resource_mguw0"]
+script = ExtResource("1_rh655")
+line_id = &"apres_defense"
+speaker = "Luc"
+text = "Merci. Je ne sais pas ce que ça vaut venant de moi, mais... merci. Je vais faire en sorte que ça compte."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_871al")]([])
+
+[resource]
+script = ExtResource("3_dn1j7")
+id = &"luc_apres_defense"
+start_line_id = &"apres_defense"
+lines = Array[ExtResource("1_rh655")]([SubResource("Resource_mguw0")])
+required_flags = Array[StringName]([&"luc/defended"])
+forbidden_flags = Array[StringName]([])

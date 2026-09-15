@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_s23bq"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_v8dks"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_esv1e"]
+
+[sub_resource type="Resource" id="Resource_otq5q"]
+script = ExtResource("1_s23bq")
+line_id = &"retrouve"
+speaker = "Tom"
+text = "Mon cheval ! Tu l'as retrouvé ! Merci merci merci, je croyais qu'il était parti pour toujours !"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &"quest_jouet_tom"
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_v8dks")]([])
+
+[resource]
+script = ExtResource("3_esv1e")
+id = &"tom_jouet_retrouve"
+start_line_id = &"retrouve"
+lines = Array[ExtResource("1_s23bq")]([SubResource("Resource_otq5q")])
+required_flags = Array[StringName]([&"item/jouet_de_tom/found"])
+forbidden_flags = Array[StringName]([&"quest/quest_jouet_tom/completed"])

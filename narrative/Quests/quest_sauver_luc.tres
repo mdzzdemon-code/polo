@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Quests/quest_data.gd" id="1_wcdr7"]
+
+[resource]
+script = ExtResource("1_wcdr7")
+id = &"quest_sauver_luc"
+title = "Le jugement de Luc"
+summary = "Une rechute inexpliquée menace de faire condamner Luc pour un vol qu'il n'a peut-être pas choisi."
+giver_character_id = &"luc"
+available_from_day = 1
+available_until_day = 3
+available_from_hour = 0
+available_until_hour = 24
+required_flags = Array[StringName]([])
+failure_flags = Array[StringName]([&"luc/condemned"])
+reward_memory_id = &"souvenir_confiance_luc"
+reward_item_ids = Array[StringName]([])

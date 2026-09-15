@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 		minute_of_day -= MINUTES_PER_DAY
 		day += 1
 		day_changed.emit(day)
+		EventManager.set_flag("time/day_%d" % day)
 	if hour() != prev_hour:
 		hour_changed.emit(hour())
 

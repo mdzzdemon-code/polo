@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_f6pt4"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_tw3h4"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_a6apj"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_oki8g"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_sm46y"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_x44uc"]
 
-[sub_resource type="Resource" id="Resource_yskac"]
-script = ExtResource("1_f6pt4")
+[sub_resource type="Resource" id="Resource_t5yq6"]
+script = ExtResource("1_oki8g")
 line_id = &"intro"
 speaker = "Gaspard"
 text = "On ne vient pas jusqu'ici par hasard. Je vis seul, et ça me va très bien comme ça — la plupart du temps."
@@ -18,10 +18,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &"suite"
-choices = Array[ExtResource("2_tw3h4")]([])
+choices = Array[ExtResource("2_sm46y")]([])
 
-[sub_resource type="Resource" id="Resource_bwnqs"]
-script = ExtResource("1_f6pt4")
+[sub_resource type="Resource" id="Resource_hb5e3"]
+script = ExtResource("1_oki8g")
 line_id = &"suite"
 speaker = "Gaspard"
 text = "J'ai cru, il y a longtemps, que j'étais quelque chose d'important. Une erreur du monde. Je me suis trompé. Fais attention à ne pas commettre la même erreur — dans un sens ou dans l'autre."
@@ -34,12 +34,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_tw3h4")]([])
+choices = Array[ExtResource("2_sm46y")]([])
 
 [resource]
-script = ExtResource("3_a6apj")
+script = ExtResource("3_x44uc")
 id = &"gaspard_intro"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_f6pt4")]([SubResource("Resource_yskac"), SubResource("Resource_bwnqs")])
+lines = Array[ExtResource("1_oki8g")]([SubResource("Resource_t5yq6"), SubResource("Resource_hb5e3")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

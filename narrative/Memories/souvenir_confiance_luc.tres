@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Memories/memory_data.gd" id="1_pv2ga"]
+
+[resource]
+script = ExtResource("1_pv2ga")
+id = &"souvenir_confiance_luc"
+display_name = "Ce qu'on choisit de devenir"
+carnet_anomalie_text = "Un homme qui avait volé a choisi, un jour, d'arrêter. Je l'ai cru. Je crois encore qu'on peut choisir qui on devient."
+true_text = "Un homme qui avait volé a choisi, un jour, d'arrêter. Je l'ai cru. Je crois encore qu'on peut choisir qui on devient."
+is_false_memory = false
+source_hint = ""
+unlocks_ability = &""

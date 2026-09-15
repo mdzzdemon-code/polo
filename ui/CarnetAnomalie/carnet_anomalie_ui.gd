@@ -21,13 +21,15 @@ func _on_panel_opened(panel_name: StringName) -> void:
 func refresh() -> void:
 	for c in list.get_children():
 		c.queue_free()
-	if MemoryManager.known_memories.is_empty():
+	if MemoryManager.possessed_memories.is_empty():
 		var lbl := Label.new()
 		lbl.text = "Le carnet est vide pour l'instant."
 		list.add_child(lbl)
 		return
-	for id in MemoryManager.known_memories.keys():
-		var memory: MemoryData = MemoryManager.known_memories[id]
+	for id in MemoryManager.possessed_memories:
+		var memory: MemoryData = MemoryManager.known_memories.get(id)
+		if memory == null:
+			continue
 		var lbl := RichTextLabel.new()
 		lbl.fit_content = true
 		lbl.bbcode_enabled = true

@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_hb5kw"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_h15nw"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_fwx0d"]
+
+[sub_resource type="Resource" id="Resource_bl20k"]
+script = ExtResource("2_h15nw")
+text = "C'est de la pitié, j'imagine."
+target_line_id = &""
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"rudric/agreed", &"rudric/opinion_given"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = true
+
+[sub_resource type="Resource" id="Resource_ax4pc"]
+script = ExtResource("2_h15nw")
+text = "C'est un meurtre, quoi que tu en dises."
+target_line_id = &""
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"rudric/disagreed", &"rudric/opinion_given"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = true
+
+[sub_resource type="Resource" id="Resource_4q177"]
+script = ExtResource("1_hb5kw")
+line_id = &"opinion"
+speaker = "Rudric"
+text = "Dis-moi honnêtement. Tuer quelqu'un pour lui éviter de souffrir plus tard... c'est un acte de pitié, ou c'est un meurtre qui se donne bonne conscience ?"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_h15nw")]([SubResource("Resource_bl20k"), SubResource("Resource_ax4pc")])
+
+[resource]
+script = ExtResource("3_fwx0d")
+id = &"rudric_opinion"
+start_line_id = &"opinion"
+lines = Array[ExtResource("1_hb5kw")]([SubResource("Resource_4q177")])
+required_flags = Array[StringName]([&"event/rudric_met"])
+forbidden_flags = Array[StringName]([&"rudric/opinion_given"])

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_oegaj"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_4x2cr"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_uaq35"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_at1i8"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_gfrpj"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_md7og"]
 
-[sub_resource type="Resource" id="Resource_o07rv"]
-script = ExtResource("2_4x2cr")
+[sub_resource type="Resource" id="Resource_0ekrd"]
+script = ExtResource("2_gfrpj")
 text = "On m'a parlé de ton passé."
 target_line_id = &"passe"
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_2ef7y"]
-script = ExtResource("2_4x2cr")
+[sub_resource type="Resource" id="Resource_1nj1w"]
+script = ExtResource("2_gfrpj")
 text = "Rien de spécial, je me présentais."
 target_line_id = &"rien"
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_jqg60"]
-script = ExtResource("1_oegaj")
+[sub_resource type="Resource" id="Resource_c8i4f"]
+script = ExtResource("1_at1i8")
 line_id = &"intro"
 speaker = "Luc"
 text = "Si tu cherches les enfants du village, ils ne sont pas loin. Je garde un œil sur eux, histoire de rendre un peu de ce que j'ai pris."
@@ -46,10 +46,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_4x2cr")]([SubResource("Resource_o07rv"), SubResource("Resource_2ef7y")])
+choices = Array[ExtResource("2_gfrpj")]([SubResource("Resource_0ekrd"), SubResource("Resource_1nj1w")])
 
-[sub_resource type="Resource" id="Resource_rfhql"]
-script = ExtResource("1_oegaj")
+[sub_resource type="Resource" id="Resource_mgxib"]
+script = ExtResource("1_at1i8")
 line_id = &"passe"
 speaker = "Luc"
 text = "Alors tu sais. Oui, j'ai volé. Un objet sacré, même. Et j'ai eu la chance qu'on me laisse devenir autre chose. Ça ne s'oublie pas facilement, ni pour moi, ni pour les autres."
@@ -62,10 +62,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_4x2cr")]([])
+choices = Array[ExtResource("2_gfrpj")]([])
 
-[sub_resource type="Resource" id="Resource_57xts"]
-script = ExtResource("1_oegaj")
+[sub_resource type="Resource" id="Resource_0drsx"]
+script = ExtResource("1_at1i8")
 line_id = &"rien"
 speaker = "Luc"
 text = "Dans ce cas, bienvenue. Fais attention à toi ici."
@@ -78,12 +78,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_4x2cr")]([])
+choices = Array[ExtResource("2_gfrpj")]([])
 
 [resource]
-script = ExtResource("3_uaq35")
+script = ExtResource("3_md7og")
 id = &"luc_intro"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_oegaj")]([SubResource("Resource_jqg60"), SubResource("Resource_rfhql"), SubResource("Resource_57xts")])
+lines = Array[ExtResource("1_at1i8")]([SubResource("Resource_c8i4f"), SubResource("Resource_mgxib"), SubResource("Resource_0drsx")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

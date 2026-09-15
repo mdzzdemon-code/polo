@@ -19,8 +19,325 @@ func _init() -> void:
 	gen_aelia()
 	gen_elena()
 	gen_endings()
+	gen_memories()
+	gen_tom_quest()
+	gen_luc_romain_chain()
+	gen_followups()
 	print("Content generation complete.")
 	quit()
+
+
+func gen_memories() -> void:
+	var enfance := MemoryData.new()
+	enfance.id = &"souvenir_enfance_fausse"
+	enfance.display_name = "Un jardin"
+	enfance.carnet_anomalie_text = "Je me souviens d'un jardin, d'un rire, d'une main qui tenait la mienne. C'était calme. C'était chez moi."
+	enfance.true_text = "Il n'y a jamais eu de jardin. Ce souvenir a été placé là, comme les autres, pour que je ne pose pas de questions."
+	enfance.is_false_memory = true
+	enfance.source_hint = "La vérité se trouve peut-être du côté des ruines anciennes."
+	ResourceSaver.save(enfance, "res://narrative/Memories/souvenir_enfance_fausse.tres")
+
+	var maelle_mem := MemoryData.new()
+	maelle_mem.id = &"souvenir_maelle"
+	maelle_mem.display_name = "La forêt, un matin"
+	maelle_mem.carnet_anomalie_text = "Maëlle m'a trouvé dans la forêt. Elle n'avait aucune raison de m'aider. Elle l'a fait quand même."
+	maelle_mem.true_text = maelle_mem.carnet_anomalie_text
+	maelle_mem.is_false_memory = false
+	ResourceSaver.save(maelle_mem, "res://narrative/Memories/souvenir_maelle.tres")
+
+	var luc_mem := MemoryData.new()
+	luc_mem.id = &"souvenir_confiance_luc"
+	luc_mem.display_name = "Ce qu'on choisit de devenir"
+	luc_mem.carnet_anomalie_text = "Un homme qui avait volé a choisi, un jour, d'arrêter. Je l'ai cru. Je crois encore qu'on peut choisir qui on devient."
+	luc_mem.true_text = luc_mem.carnet_anomalie_text
+	luc_mem.is_false_memory = false
+	ResourceSaver.save(luc_mem, "res://narrative/Memories/souvenir_confiance_luc.tres")
+
+
+func gen_tom_quest() -> void:
+	var toy := ItemData.new()
+	toy.id = &"jouet_de_tom"
+	toy.display_name = "Jouet en bois de Tom"
+	toy.kind = ItemData.Kind.KEY_ITEM
+	toy.stackable = false
+	toy.persists_across_loops = false
+	toy.placeholder_color = Color(0.8, 0.6, 0.3, 1.0)
+	toy.description = "Un petit cheval de bois usé. Tom le cherche partout."
+	ResourceSaver.save(toy, "res://narrative/Items/jouet_de_tom.tres")
+
+	var quest := QuestData.new()
+	quest.id = &"quest_jouet_tom"
+	quest.title = "Le jouet perdu"
+	quest.summary = "Tom a perdu son cheval de bois quelque part au village."
+	quest.giver_character_id = &"tom"
+	quest.available_from_day = 1
+	quest.available_until_day = 3
+	quest.available_from_hour = 0
+	quest.available_until_hour = 24
+	ResourceSaver.save(quest, "res://narrative/Quests/quest_jouet_tom.tres")
+
+	# Extend Tom's intro: after either branch, he mentions the lost toy.
+	var choice_oui := DialogueChoice.new()
+	choice_oui.text = "Parfois, oui."
+	choice_oui.target_line_id = &"reponse_oui"
+	var choice_non := DialogueChoice.new()
+	choice_non.text = "Non, jamais."
+	choice_non.target_line_id = &"reponse_non"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Tom"
+	l1.text = "Hé, toi ! Est-ce que ça t'arrive d'oublier des choses importantes, comme si elles n'avaient jamais existé ?"
+	l1.sets_flags = [&"event/tom_met"]
+	l1.choices = [choice_oui, choice_non]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"reponse_oui"
+	l2.speaker = "Tom"
+	l2.text = "Moi aussi parfois ! Mais mes parents disent que ça revient toujours. C'est vrai, ça, dis ?"
+	l2.auto_next_line_id = &"objet_perdu"
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"reponse_non"
+	l3.speaker = "Tom"
+	l3.text = "Chanceux ! Moi j'ai oublié le nom de mon chat pendant toute une journée une fois. C'était horrible."
+	l3.auto_next_line_id = &"objet_perdu"
+
+	var l4 := DialogueLine.new()
+	l4.line_id = &"objet_perdu"
+	l4.speaker = "Tom"
+	l4.text = "Au fait ! Tu n'aurais pas vu mon cheval en bois quelque part ? Je l'ai perdu près des maisons et je n'arrive pas à remettre la main dessus."
+	l4.starts_quest_id = &"quest_jouet_tom"
+
+	var dlg := DialogueData.new()
+	dlg.id = &"tom_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3, l4]
+	ResourceSaver.save(dlg, "res://narrative/Dialogue/content/dialogue_tom_intro.tres")
+
+	var l_retrouve := DialogueLine.new()
+	l_retrouve.line_id = &"retrouve"
+	l_retrouve.speaker = "Tom"
+	l_retrouve.text = "Mon cheval ! Tu l'as retrouvé ! Merci merci merci, je croyais qu'il était parti pour toujours !"
+	l_retrouve.completes_quest_id = &"quest_jouet_tom"
+
+	var dlg_retrouve := DialogueData.new()
+	dlg_retrouve.id = &"tom_jouet_retrouve"
+	dlg_retrouve.start_line_id = &"retrouve"
+	dlg_retrouve.lines = [l_retrouve]
+	dlg_retrouve.required_flags = [&"item/jouet_de_tom/found"]
+	dlg_retrouve.forbidden_flags = [&"quest/quest_jouet_tom/completed"]
+	ResourceSaver.save(dlg_retrouve, "res://narrative/Dialogue/content/dialogue_tom_jouet_retrouve.tres")
+
+
+func gen_luc_romain_chain() -> void:
+	var l_relapse := DialogueLine.new()
+	l_relapse.line_id = &"relapse"
+	l_relapse.speaker = "Luc"
+	l_relapse.text = "...Je ne sais pas ce qui s'est passé cette nuit. Je me suis réveillé avec quelque chose entre les mains qui n'était pas à moi. Un glitch, je crois. Mais essaie d'expliquer ça à quelqu'un qui ne l'a pas vécu."
+	l_relapse.starts_quest_id = &"quest_sauver_luc"
+	l_relapse.sets_flags = [&"event/luc_relapse_confessed"]
+	l_relapse.triggers_glitch = true
+	l_relapse.auto_next_line_id = &"relapse_suite"
+
+	var l_relapse2 := DialogueLine.new()
+	l_relapse2.line_id = &"relapse_suite"
+	l_relapse2.speaker = "Luc"
+	l_relapse2.text = "Si Romain l'apprend, je suis fini. Pas à cause de ce que j'ai fait — à cause de ce que j'ai été."
+
+	var dlg_relapse := DialogueData.new()
+	dlg_relapse.id = &"luc_relapse"
+	dlg_relapse.start_line_id = &"relapse"
+	dlg_relapse.lines = [l_relapse, l_relapse2]
+	dlg_relapse.required_flags = [&"time/day_2"]
+	dlg_relapse.forbidden_flags = [&"luc/defended", &"luc/condemned"]
+	ResourceSaver.save(dlg_relapse, "res://narrative/Dialogue/content/dialogue_luc_relapse.tres")
+
+	var l_apres := DialogueLine.new()
+	l_apres.line_id = &"apres_defense"
+	l_apres.speaker = "Luc"
+	l_apres.text = "Merci. Je ne sais pas ce que ça vaut venant de moi, mais... merci. Je vais faire en sorte que ça compte."
+
+	var dlg_apres := DialogueData.new()
+	dlg_apres.id = &"luc_apres_defense"
+	dlg_apres.start_line_id = &"apres_defense"
+	dlg_apres.lines = [l_apres]
+	dlg_apres.required_flags = [&"luc/defended"]
+	ResourceSaver.save(dlg_apres, "res://narrative/Dialogue/content/dialogue_luc_apres_defense.tres")
+
+	var quest := QuestData.new()
+	quest.id = &"quest_sauver_luc"
+	quest.title = "Le jugement de Luc"
+	quest.summary = "Une rechute inexpliquée menace de faire condamner Luc pour un vol qu'il n'a peut-être pas choisi."
+	quest.giver_character_id = &"luc"
+	quest.available_from_day = 1
+	quest.available_until_day = 3
+	quest.available_from_hour = 0
+	quest.available_until_hour = 24
+	quest.failure_flags = [&"luc/condemned"]
+	quest.reward_memory_id = &"souvenir_confiance_luc"
+	ResourceSaver.save(quest, "res://narrative/Quests/quest_sauver_luc.tres")
+
+	var choice_defendre := DialogueChoice.new()
+	choice_defendre.text = "Luc n'est pas lui-même en ce moment. Laisse-le tranquille."
+	choice_defendre.sets_flags = [&"luc/defended"]
+	choice_defendre.completes_quest_id = &"quest_sauver_luc"
+	choice_defendre.ends_dialogue = true
+
+	var choice_condamner := DialogueChoice.new()
+	choice_condamner.text = "Un vol est un vol. Fais ton travail."
+	choice_condamner.sets_flags = [&"luc/condemned"]
+	choice_condamner.ends_dialogue = true
+
+	var l_jugement := DialogueLine.new()
+	l_jugement.line_id = &"jugement"
+	l_jugement.speaker = "Romain"
+	l_jugement.text = "On m'a rapporté quelque chose au sujet de Luc. Je ne veux pas croire qu'il ait replongé, mais je ne peux pas non plus l'ignorer. Qu'en penses-tu, toi qui le connais peut-être mieux que moi ?"
+	l_jugement.choices = [choice_defendre, choice_condamner]
+
+	var dlg_jugement := DialogueData.new()
+	dlg_jugement.id = &"romain_jugement_luc"
+	dlg_jugement.start_line_id = &"jugement"
+	dlg_jugement.lines = [l_jugement]
+	dlg_jugement.required_flags = [&"event/luc_relapse_confessed"]
+	dlg_jugement.forbidden_flags = [&"luc/defended", &"luc/condemned"]
+	ResourceSaver.save(dlg_jugement, "res://narrative/Dialogue/content/dialogue_romain_jugement_luc.tres")
+
+
+func gen_followups() -> void:
+	# Victor — completes the fragment-reaction dialogue only once, then offers
+	# real gameplay tips in-character afterward.
+	var conseils1 := DialogueLine.new()
+	conseils1.line_id = &"conseils"
+	conseils1.speaker = "Victor"
+	conseils1.text = "Un conseil, si les choses tournent mal : verrouille ta cible avant d'engager, et n'essaie de parer que les coups qui te semblent vraiment dangereux. Le reste, esquive-le."
+	conseils1.sets_flags = [&"victor/conseils_vus"]
+
+	var dlg_conseils := DialogueData.new()
+	dlg_conseils.id = &"victor_conseils"
+	dlg_conseils.start_line_id = &"conseils"
+	dlg_conseils.lines = [conseils1]
+	dlg_conseils.required_flags = [&"quest/aider_le_chevalier/completed"]
+	dlg_conseils.forbidden_flags = [&"victor/conseils_vus"]
+	ResourceSaver.save(dlg_conseils, "res://narrative/Dialogue/content/dialogue_victor_conseils.tres")
+
+	# Sacha — opens up further if the first meeting went calmly, with a
+	# keyword-gated deeper branch (exercises required_keyword_tag).
+	var choice_normal := DialogueChoice.new()
+	choice_normal.text = "Ça doit être difficile."
+	choice_normal.sets_flags = [&"sacha/confiance_partagee"]
+	choice_normal.ends_dialogue = true
+
+	var choice_curieux := DialogueChoice.new()
+	choice_curieux.text = "(Curiosité) Qu'est-ce que tu as envie de faire, toi, si tu pouvais choisir ?"
+	choice_curieux.required_keyword_tag = &"curiosite"
+	choice_curieux.target_line_id = &"ouverture_profonde"
+
+	var l_ouverture := DialogueLine.new()
+	l_ouverture.line_id = &"ouverture"
+	l_ouverture.speaker = "Sacha"
+	l_ouverture.text = "Tu sais... c'est mes parents. Ils se disputent tout le temps en ce moment. Je sais pas trop quoi faire, alors je fais style que ça me touche pas."
+	l_ouverture.choices = [choice_normal, choice_curieux]
+
+	var l_profonde := DialogueLine.new()
+	l_profonde.line_id = &"ouverture_profonde"
+	l_profonde.speaker = "Sacha"
+	l_profonde.text = "...Partir, je crois. Loin. Mais je dis ça et j'ai même pas le courage de sortir de ma chambre certains jours. Alors bon."
+	l_profonde.sets_flags = [&"sacha/confiance_partagee", &"sacha/confiance_profonde"]
+
+	var dlg_sacha := DialogueData.new()
+	dlg_sacha.id = &"sacha_confiance"
+	dlg_sacha.start_line_id = &"ouverture"
+	dlg_sacha.lines = [l_ouverture, l_profonde]
+	dlg_sacha.required_flags = [&"sacha/relation/calme"]
+	dlg_sacha.forbidden_flags = [&"sacha/confiance_partagee"]
+	ResourceSaver.save(dlg_sacha, "res://narrative/Dialogue/content/dialogue_sacha_confiance.tres")
+
+	# Rudric — asks the player's own opinion directly.
+	var choice_agree := DialogueChoice.new()
+	choice_agree.text = "C'est de la pitié, j'imagine."
+	choice_agree.sets_flags = [&"rudric/agreed", &"rudric/opinion_given"]
+	choice_agree.ends_dialogue = true
+
+	var choice_disagree := DialogueChoice.new()
+	choice_disagree.text = "C'est un meurtre, quoi que tu en dises."
+	choice_disagree.sets_flags = [&"rudric/disagreed", &"rudric/opinion_given"]
+	choice_disagree.ends_dialogue = true
+
+	var l_opinion := DialogueLine.new()
+	l_opinion.line_id = &"opinion"
+	l_opinion.speaker = "Rudric"
+	l_opinion.text = "Dis-moi honnêtement. Tuer quelqu'un pour lui éviter de souffrir plus tard... c'est un acte de pitié, ou c'est un meurtre qui se donne bonne conscience ?"
+	l_opinion.choices = [choice_agree, choice_disagree]
+
+	var dlg_rudric := DialogueData.new()
+	dlg_rudric.id = &"rudric_opinion"
+	dlg_rudric.start_line_id = &"opinion"
+	dlg_rudric.lines = [l_opinion]
+	dlg_rudric.required_flags = [&"event/rudric_met"]
+	dlg_rudric.forbidden_flags = [&"rudric/opinion_given"]
+	ResourceSaver.save(dlg_rudric, "res://narrative/Dialogue/content/dialogue_rudric_opinion.tres")
+
+	# Gaspard — deeper foreshadowing on a later visit.
+	var l_gaspard := DialogueLine.new()
+	l_gaspard.line_id = &"suite"
+	l_gaspard.speaker = "Gaspard"
+	l_gaspard.text = "Tu es encore là. Bien. Je vais te dire une chose que je n'ai dite à personne : la nuit où j'ai compris que je me trompais, quelqu'un d'autre a disparu à ma place. Je n'ai jamais su qui. Ni pourquoi."
+	l_gaspard.sets_flags = [&"gaspard/suite_vu"]
+
+	var dlg_gaspard := DialogueData.new()
+	dlg_gaspard.id = &"gaspard_suite"
+	dlg_gaspard.start_line_id = &"suite"
+	dlg_gaspard.lines = [l_gaspard]
+	dlg_gaspard.required_flags = [&"time/day_2", &"event/gaspard_met"]
+	dlg_gaspard.forbidden_flags = [&"gaspard/suite_vu"]
+	ResourceSaver.save(dlg_gaspard, "res://narrative/Dialogue/content/dialogue_gaspard_suite.tres")
+
+	# Aelia — devotion becomes more explicitly dangerous.
+	var l_aelia := DialogueLine.new()
+	l_aelia.line_id = &"suite"
+	l_aelia.speaker = "Aelia"
+	l_aelia.text = "Je dois te dire quelque chose, et je veux que tu l'entendes clairement : si quelqu'un décide que tu es une menace à éliminer, je ne discuterai pas avec lui. Je ne discute jamais deux fois."
+	l_aelia.sets_flags = [&"aelia/suite_vue"]
+
+	var dlg_aelia := DialogueData.new()
+	dlg_aelia.id = &"aelia_suite"
+	dlg_aelia.start_line_id = &"suite"
+	dlg_aelia.lines = [l_aelia]
+	dlg_aelia.required_flags = [&"event/aelia_devotion_revealed"]
+	dlg_aelia.forbidden_flags = [&"aelia/suite_vue"]
+	ResourceSaver.save(dlg_aelia, "res://narrative/Dialogue/content/dialogue_aelia_suite.tres")
+
+	# Eléna — deepens the mystery once the player has more context (met Aelia).
+	var l_elena := DialogueLine.new()
+	l_elena.line_id = &"suite"
+	l_elena.speaker = "Eléna"
+	l_elena.text = "Tu as l'air d'en savoir un peu plus qu'avant. Ça se voit, tu sais — à la façon dont tu me regardes maintenant. Ne t'inquiète pas. Je ne suis pas pressée que tu te souviennes de tout."
+	l_elena.sets_flags = [&"elena/suite_vue"]
+
+	var dlg_elena := DialogueData.new()
+	dlg_elena.id = &"elena_suite"
+	dlg_elena.start_line_id = &"suite"
+	dlg_elena.lines = [l_elena]
+	dlg_elena.required_flags = [&"event/aelia_devotion_revealed"]
+	dlg_elena.forbidden_flags = [&"elena/suite_vue"]
+	ResourceSaver.save(dlg_elena, "res://narrative/Dialogue/content/dialogue_elena_suite.tres")
+
+	# Maëlle — closure beat once the village thread has resolved.
+	var l_maelle := DialogueLine.new()
+	l_maelle.line_id = &"suite"
+	l_maelle.speaker = "Maëlle"
+	l_maelle.text = "Je repense souvent à notre rencontre, tu sais. Je ne sais toujours pas ce que tu es. Mais je sais que je suis contente que le fragment m'ait menée jusqu'à toi, quoi qu'il arrive après."
+	l_maelle.sets_flags = [&"maelle/suite_vue"]
+	l_maelle.grants_keyword_id = &"curiosite"
+
+	var dlg_maelle := DialogueData.new()
+	dlg_maelle.id = &"maelle_suite"
+	dlg_maelle.start_line_id = &"suite"
+	dlg_maelle.lines = [l_maelle]
+	dlg_maelle.required_flags = [&"quest/aider_le_chevalier/completed"]
+	dlg_maelle.forbidden_flags = [&"maelle/suite_vue"]
+	ResourceSaver.save(dlg_maelle, "res://narrative/Dialogue/content/dialogue_maelle_suite.tres")
 
 
 func gen_endings() -> void:
@@ -211,6 +528,7 @@ func gen_victor() -> void:
 	dlg_a.start_line_id = &"intro"
 	dlg_a.lines = [l1a, l2a]
 	dlg_a.required_flags = [&"event/fragment_reacts"]
+	dlg_a.forbidden_flags = [&"quest/aider_le_chevalier/completed"]
 	_save_dlg(dlg_a)
 
 	# Default variant if met before the forest event.
@@ -542,6 +860,7 @@ func gen_maelle() -> void:
 	quest.available_until_day = 3
 	quest.available_from_hour = 0
 	quest.available_until_hour = 24
+	quest.reward_memory_id = &"souvenir_maelle"
 	ResourceSaver.save(quest, "res://narrative/Quests/aider_le_chevalier.tres")
 
 	var choice_explique := DialogueChoice.new()

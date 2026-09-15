@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MemoryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Memories/memory_data.gd" id="1_l8q4t"]
+
+[resource]
+script = ExtResource("1_l8q4t")
+id = &"souvenir_maelle"
+display_name = "La forêt, un matin"
+carnet_anomalie_text = "Maëlle m'a trouvé dans la forêt. Elle n'avait aucune raison de m'aider. Elle l'a fait quand même."
+true_text = "Maëlle m'a trouvé dans la forêt. Elle n'avait aucune raison de m'aider. Elle l'a fait quand même."
+is_false_memory = false
+source_hint = ""
+unlocks_ability = &""
