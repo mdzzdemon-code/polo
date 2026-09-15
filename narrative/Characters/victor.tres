@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_n3sg6"]
+
+[resource]
+script = ExtResource("1_n3sg6")
+id = &"victor"
+character_name = "Victor"
+age = 27
+personality = "sérieux, mais avec un vrai sens de l'humour ; protège le peuple avant de suivre les ordres"
+schedule = Array[Dictionary]([])
+memories = Array[StringName]([])
+relationships = {}
+dialogue_tree_path = ""
+quest_ids = Array[StringName]([])
+death_conditions = Array[Dictionary]([])
+loop_state = {}
+placeholder_color = Color(0.35, 0.45, 0.7, 1)
+max_health = 60.0
+can_die = true

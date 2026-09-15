@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1_f53r7"]
+[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1_e8snt"]
 
 [resource]
-script = ExtResource("1_f53r7")
+script = ExtResource("1_e8snt")
 id = &"arc_des_echos"
 display_name = "Arc des Échos"
 category = 2

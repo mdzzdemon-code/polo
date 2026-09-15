@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_lgfay"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_fiber"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_vjswa"]
+
+[sub_resource type="Resource" id="Resource_s0x1k"]
+script = ExtResource("1_lgfay")
+line_id = &"intro"
+speaker = "Gaspard"
+text = "On ne vient pas jusqu'ici par hasard. Je vis seul, et ça me va très bien comme ça — la plupart du temps."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/gaspard_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &"suite"
+choices = Array[ExtResource("2_fiber")]([])
+
+[sub_resource type="Resource" id="Resource_7ah55"]
+script = ExtResource("1_lgfay")
+line_id = &"suite"
+speaker = "Gaspard"
+text = "J'ai cru, il y a longtemps, que j'étais quelque chose d'important. Une erreur du monde. Je me suis trompé. Fais attention à ne pas commettre la même erreur — dans un sens ou dans l'autre."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_fiber")]([])
+
+[resource]
+script = ExtResource("3_vjswa")
+id = &"gaspard_intro"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_lgfay")]([SubResource("Resource_s0x1k"), SubResource("Resource_7ah55")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

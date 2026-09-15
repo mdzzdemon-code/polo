@@ -1,7 +1,10 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
+[ext_resource type="PackedScene" path="res://world/NPC/npc.tscn" id="3"]
+[ext_resource type="Resource" path="res://narrative/Characters/aelia.tres" id="4"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_aelia_intro.tres" id="5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.28, 0.2, 0.4, 1)
@@ -139,6 +142,11 @@ rotation_degrees = Vector3(0, 180, 0)
 [node name="AelieSpot" type="Marker3D" parent="."]
 position = Vector3(0, 0.1, -9)
 rotation_degrees = Vector3(0, 180, 0)
+
+[node name="Aelia" parent="." instance=ExtResource("3")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, -9)
+character_data = ExtResource("4")
+dialogue = ExtResource("5")
 
 [node name="ToMontagne" type="Area3D" parent="."]
 position = Vector3(0, 1, 18)

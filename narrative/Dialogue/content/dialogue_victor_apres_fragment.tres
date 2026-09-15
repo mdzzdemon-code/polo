@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_5w5m1"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_rkrcd"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_0a6tf"]
+
+[sub_resource type="Resource" id="Resource_2tyas"]
+script = ExtResource("1_5w5m1")
+line_id = &"intro"
+speaker = "Victor"
+text = "Maëlle m'a parlé de toi — et du fragment qui s'est mis à réagir. Ce n'est pas rien. Tu m'as l'air bien calme pour quelqu'un qui vient de faire briller une relique ancienne."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/victor_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &"aider_le_chevalier"
+triggers_glitch = false
+auto_next_line_id = &"suite"
+choices = Array[ExtResource("2_rkrcd")]([])
+
+[sub_resource type="Resource" id="Resource_nn8p3"]
+script = ExtResource("1_5w5m1")
+line_id = &"suite"
+speaker = "Victor"
+text = "Je n'ai pas de réponses, seulement une lame et de la bonne volonté. Mais si les choses tournent mal, je serai là."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_rkrcd")]([])
+
+[resource]
+script = ExtResource("3_0a6tf")
+id = &"victor_apres_fragment"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_5w5m1")]([SubResource("Resource_2tyas"), SubResource("Resource_nn8p3")])
+required_flags = Array[StringName]([&"event/fragment_reacts"])
+forbidden_flags = Array[StringName]([])

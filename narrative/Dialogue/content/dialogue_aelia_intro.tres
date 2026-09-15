@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_lksi8"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_88ecg"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_7e83k"]
+
+[sub_resource type="Resource" id="Resource_ebhwt"]
+script = ExtResource("1_lksi8")
+line_id = &"intro"
+speaker = "Aelia"
+text = "...Enfin. Je savais que quelque chose comme toi finirait par franchir ce seuil. Quatre cents ans que j'attends, et te voilà, sans même savoir ce que tu es."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/aelia_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &"avertissement"
+choices = Array[ExtResource("2_88ecg")]([])
+
+[sub_resource type="Resource" id="Resource_voli8"]
+script = ExtResource("1_lksi8")
+line_id = &"avertissement"
+speaker = "Aelia"
+text = "Ne t'inquiète pas. Je ne laisserai personne te faire de mal ici. Personne. C'est une promesse — et je tiens toujours mes promesses."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/aelia_devotion_revealed"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_88ecg")]([])
+
+[resource]
+script = ExtResource("3_7e83k")
+id = &"aelia_intro"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_lksi8")]([SubResource("Resource_ebhwt"), SubResource("Resource_voli8")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

@@ -9,8 +9,374 @@ extends SceneTree
 func _init() -> void:
 	gen_maelle()
 	gen_combat_content()
+	gen_tom()
+	gen_romain()
+	gen_victor()
+	gen_luc()
+	gen_sacha()
+	gen_rudric()
+	gen_gaspard()
+	gen_aelia()
+	gen_elena()
 	print("Content generation complete.")
 	quit()
+
+
+func _save_char(char_data: CharacterData) -> void:
+	ResourceSaver.save(char_data, "res://narrative/Characters/%s.tres" % char_data.id)
+
+
+func _save_dlg(dlg: DialogueData) -> void:
+	ResourceSaver.save(dlg, "res://narrative/Dialogue/content/dialogue_%s.tres" % dlg.id)
+
+
+func gen_tom() -> void:
+	var c := CharacterData.new()
+	c.id = &"tom"
+	c.character_name = "Tom"
+	c.age = 7
+	c.personality = "extrêmement joyeux, innocent, curieux"
+	c.placeholder_color = Color(0.95, 0.85, 0.3, 1.0)
+	c.max_health = 15.0
+	c.can_die = true
+	_save_char(c)
+
+	var choice_oui := DialogueChoice.new()
+	choice_oui.text = "Parfois, oui."
+	choice_oui.target_line_id = &"reponse_oui"
+	var choice_non := DialogueChoice.new()
+	choice_non.text = "Non, jamais."
+	choice_non.target_line_id = &"reponse_non"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Tom"
+	l1.text = "Hé, toi ! Est-ce que ça t'arrive d'oublier des choses importantes, comme si elles n'avaient jamais existé ?"
+	l1.sets_flags = [&"event/tom_met"]
+	l1.choices = [choice_oui, choice_non]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"reponse_oui"
+	l2.speaker = "Tom"
+	l2.text = "Moi aussi parfois ! Mais mes parents disent que ça revient toujours. C'est vrai, ça, dis ?"
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"reponse_non"
+	l3.speaker = "Tom"
+	l3.text = "Chanceux ! Moi j'ai oublié le nom de mon chat pendant toute une journée une fois. C'était horrible."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"tom_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3]
+	_save_dlg(dlg)
+
+
+func gen_romain() -> void:
+	var c := CharacterData.new()
+	c.id = &"romain"
+	c.character_name = "Romain"
+	c.age = 34
+	c.personality = "chaleureux, honorable, presque rassurant — mais capable de décisions très dures"
+	c.placeholder_color = Color(0.6, 0.5, 0.75, 1.0)
+	c.max_health = 40.0
+	c.can_die = true
+	_save_char(c)
+
+	var choice_presence := DialogueChoice.new()
+	choice_presence.text = "Quelle présence ?"
+	choice_presence.target_line_id = &"presence"
+	var choice_ignore := DialogueChoice.new()
+	choice_ignore.text = "Rien, laisse tomber."
+	choice_ignore.target_line_id = &"ignore"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Romain"
+	l1.text = "Bienvenue à Boiselle, étranger. Je veille sur cette région du mieux que je peux. N'hésite pas si tu as besoin de quoi que ce soit."
+	l1.sets_flags = [&"event/romain_met"]
+	l1.choices = [choice_presence, choice_ignore]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"presence"
+	l2.speaker = "Romain"
+	l2.text = "...Rien. Disons simplement qu'il y a des choses anciennes, du côté de la montagne, que je préfère ne pas déranger. Je ne la connais pas. Je sais seulement qu'elle existe."
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"ignore"
+	l3.speaker = "Romain"
+	l3.text = "Comme tu veux. Passe une bonne journée."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"romain_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3]
+	_save_dlg(dlg)
+
+
+func gen_victor() -> void:
+	var c := CharacterData.new()
+	c.id = &"victor"
+	c.character_name = "Victor"
+	c.age = 27
+	c.personality = "sérieux, mais avec un vrai sens de l'humour ; protège le peuple avant de suivre les ordres"
+	c.placeholder_color = Color(0.35, 0.45, 0.7, 1.0)
+	c.max_health = 60.0
+	c.can_die = true
+	_save_char(c)
+
+	# Variant used once Maëlle's opening event has fired — completes her quest.
+	var l1a := DialogueLine.new()
+	l1a.line_id = &"intro"
+	l1a.speaker = "Victor"
+	l1a.text = "Maëlle m'a parlé de toi — et du fragment qui s'est mis à réagir. Ce n'est pas rien. Tu m'as l'air bien calme pour quelqu'un qui vient de faire briller une relique ancienne."
+	l1a.completes_quest_id = &"aider_le_chevalier"
+	l1a.sets_flags = [&"event/victor_met"]
+	l1a.auto_next_line_id = &"suite"
+
+	var l2a := DialogueLine.new()
+	l2a.line_id = &"suite"
+	l2a.speaker = "Victor"
+	l2a.text = "Je n'ai pas de réponses, seulement une lame et de la bonne volonté. Mais si les choses tournent mal, je serai là."
+
+	var dlg_a := DialogueData.new()
+	dlg_a.id = &"victor_apres_fragment"
+	dlg_a.start_line_id = &"intro"
+	dlg_a.lines = [l1a, l2a]
+	dlg_a.required_flags = [&"event/fragment_reacts"]
+	_save_dlg(dlg_a)
+
+	# Default variant if met before the forest event.
+	var l1b := DialogueLine.new()
+	l1b.line_id = &"intro"
+	l1b.speaker = "Victor"
+	l1b.text = "Tiens, un visage que je ne connais pas. Je suis Victor — je veille sur le village, avec plus ou moins de succès selon les jours."
+	l1b.sets_flags = [&"event/victor_met"]
+
+	var dlg_b := DialogueData.new()
+	dlg_b.id = &"victor_intro"
+	dlg_b.start_line_id = &"intro"
+	dlg_b.lines = [l1b]
+	_save_dlg(dlg_b)
+
+
+func gen_luc() -> void:
+	var c := CharacterData.new()
+	c.id = &"luc"
+	c.character_name = "Luc"
+	c.age = 41
+	c.personality = "ancien voleur devenu quelqu'un de bien ; aide les enfants ; hanté par une possible rechute"
+	c.placeholder_color = Color(0.5, 0.4, 0.3, 1.0)
+	c.max_health = 45.0
+	c.can_die = true
+	_save_char(c)
+
+	var choice_passe := DialogueChoice.new()
+	choice_passe.text = "On m'a parlé de ton passé."
+	choice_passe.target_line_id = &"passe"
+	var choice_rien := DialogueChoice.new()
+	choice_rien.text = "Rien de spécial, je me présentais."
+	choice_rien.target_line_id = &"rien"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Luc"
+	l1.text = "Si tu cherches les enfants du village, ils ne sont pas loin. Je garde un œil sur eux, histoire de rendre un peu de ce que j'ai pris."
+	l1.sets_flags = [&"event/luc_met"]
+	l1.choices = [choice_passe, choice_rien]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"passe"
+	l2.speaker = "Luc"
+	l2.text = "Alors tu sais. Oui, j'ai volé. Un objet sacré, même. Et j'ai eu la chance qu'on me laisse devenir autre chose. Ça ne s'oublie pas facilement, ni pour moi, ni pour les autres."
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"rien"
+	l3.speaker = "Luc"
+	l3.text = "Dans ce cas, bienvenue. Fais attention à toi ici."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"luc_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3]
+	_save_dlg(dlg)
+
+
+func gen_sacha() -> void:
+	var c := CharacterData.new()
+	c.id = &"sacha"
+	c.character_name = "Sacha"
+	c.age = 15
+	c.personality = "en crise familiale et émotionnelle ; hostile au premier abord ; facilement manqué"
+	c.placeholder_color = Color(0.4, 0.55, 0.4, 1.0)
+	c.max_health = 30.0
+	c.can_die = true
+	_save_char(c)
+
+	var choice_calme := DialogueChoice.new()
+	choice_calme.text = "(Rester calme.)"
+	choice_calme.target_line_id = &"calme"
+	var choice_repond := DialogueChoice.new()
+	choice_repond.text = "Je ne t'ai rien demandé."
+	choice_repond.target_line_id = &"tension"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Sacha"
+	l1.text = "...Encore un étranger que tout le monde va adorer, c'est ça ? Génial."
+	l1.sets_flags = [&"event/sacha_met"]
+	l1.choices = [choice_calme, choice_repond]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"calme"
+	l2.speaker = "Sacha"
+	l2.text = "...Ouais, bon. Désolé. C'est pas vraiment toi, le problème."
+	l2.sets_flags = [&"sacha/relation/calme"]
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"tension"
+	l3.speaker = "Sacha"
+	l3.text = "Tant mieux, parce que je n'ai rien à dire."
+	l3.sets_flags = [&"sacha/relation/tendu"]
+
+	var dlg := DialogueData.new()
+	dlg.id = &"sacha_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3]
+	_save_dlg(dlg)
+
+
+func gen_rudric() -> void:
+	var c := CharacterData.new()
+	c.id = &"rudric"
+	c.character_name = "Rudric"
+	c.age = 38
+	c.personality = "pense que tuer les personnes affectées par les glitches les empêche de souffrir ; étonnamment drôle"
+	c.placeholder_color = Color(0.55, 0.15, 0.15, 1.0)
+	c.max_health = 50.0
+	c.can_die = true
+	_save_char(c)
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Rudric"
+	l1.text = "Tu sais ce qui est marrant ? Les gens me trouvent effrayant, mais je suis probablement la personne la plus honnête que tu croiseras ici."
+	l1.sets_flags = [&"event/rudric_met"]
+	l1.auto_next_line_id = &"suite"
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"suite"
+	l2.speaker = "Rudric"
+	l2.text = "Quand quelqu'un est trop touché par... tout ça, les symptômes s'arrêtent, une fois que c'est fini pour de bon. J'appelle ça de la pitié. Les autres appellent ça autre chose."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"rudric_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2]
+	_save_dlg(dlg)
+
+
+func gen_gaspard() -> void:
+	var c := CharacterData.new()
+	c.id = &"gaspard"
+	c.character_name = "Gaspard"
+	c.age = 52
+	c.personality = "solitaire ; a cru être l'Anomalie autrefois, et s'est trompé"
+	c.placeholder_color = Color(0.45, 0.4, 0.35, 1.0)
+	c.max_health = 40.0
+	c.can_die = true
+	_save_char(c)
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Gaspard"
+	l1.text = "On ne vient pas jusqu'ici par hasard. Je vis seul, et ça me va très bien comme ça — la plupart du temps."
+	l1.sets_flags = [&"event/gaspard_met"]
+	l1.auto_next_line_id = &"suite"
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"suite"
+	l2.speaker = "Gaspard"
+	l2.text = "J'ai cru, il y a longtemps, que j'étais quelque chose d'important. Une erreur du monde. Je me suis trompé. Fais attention à ne pas commettre la même erreur — dans un sens ou dans l'autre."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"gaspard_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2]
+	_save_dlg(dlg)
+
+
+func gen_aelia() -> void:
+	var c := CharacterData.new()
+	c.id = &"aelia"
+	c.character_name = "Aelia"
+	c.age = 400
+	c.personality = "drôle, extrêmement puissante, solitaire, profondément marquée ; vénère l'Anomalie"
+	c.placeholder_color = Color(0.75, 0.85, 0.95, 1.0)
+	c.max_health = 200.0
+	c.can_die = false
+	_save_char(c)
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Aelia"
+	l1.text = "...Enfin. Je savais que quelque chose comme toi finirait par franchir ce seuil. Quatre cents ans que j'attends, et te voilà, sans même savoir ce que tu es."
+	l1.sets_flags = [&"event/aelia_met"]
+	l1.auto_next_line_id = &"avertissement"
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"avertissement"
+	l2.speaker = "Aelia"
+	l2.text = "Ne t'inquiète pas. Je ne laisserai personne te faire de mal ici. Personne. C'est une promesse — et je tiens toujours mes promesses."
+	l2.sets_flags = [&"event/aelia_devotion_revealed"]
+
+	var dlg := DialogueData.new()
+	dlg.id = &"aelia_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2]
+	_save_dlg(dlg)
+
+
+func gen_elena() -> void:
+	var c := CharacterData.new()
+	c.id = &"elena"
+	c.character_name = "Eléna"
+	c.age = 0 # indéterminé
+	c.personality = "opportuniste, difficile à cerner, parfois manipulatrice ; connaît déjà l'Anomalie sans le révéler"
+	c.placeholder_color = Color(0.6, 0.1, 0.35, 1.0)
+	c.max_health = 50.0
+	c.can_die = true
+	_save_char(c)
+
+	var choice_connais := DialogueChoice.new()
+	choice_connais.text = "On se connaît ?"
+	choice_connais.target_line_id = &"esquive"
+	var choice_rien := DialogueChoice.new()
+	choice_rien.text = "(Ne rien dire.)"
+	choice_rien.target_line_id = &"silence"
+
+	var l1 := DialogueLine.new()
+	l1.line_id = &"intro"
+	l1.speaker = "Eléna"
+	l1.text = "Tiens donc. Toujours en train de te chercher, à ce que je vois."
+	l1.sets_flags = [&"event/elena_met"]
+	l1.choices = [choice_connais, choice_rien]
+
+	var l2 := DialogueLine.new()
+	l2.line_id = &"esquive"
+	l2.speaker = "Eléna"
+	l2.text = "Disons que j'ai une bonne mémoire pour les visages. Même ceux qui changent. Ne te fais pas d'idées, ce n'est pas de l'amitié."
+
+	var l3 := DialogueLine.new()
+	l3.line_id = &"silence"
+	l3.speaker = "Eléna"
+	l3.text = "Sage réflexe. Garde-le."
+
+	var dlg := DialogueData.new()
+	dlg.id = &"elena_intro"
+	dlg.start_line_id = &"intro"
+	dlg.lines = [l1, l2, l3]
+	_save_dlg(dlg)
 
 
 func gen_combat_content() -> void:

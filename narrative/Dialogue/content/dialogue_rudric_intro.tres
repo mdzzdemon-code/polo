@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_scbxq"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_7yjje"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_ptwy7"]
+
+[sub_resource type="Resource" id="Resource_t1v0o"]
+script = ExtResource("1_scbxq")
+line_id = &"intro"
+speaker = "Rudric"
+text = "Tu sais ce qui est marrant ? Les gens me trouvent effrayant, mais je suis probablement la personne la plus honnête que tu croiseras ici."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/rudric_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &"suite"
+choices = Array[ExtResource("2_7yjje")]([])
+
+[sub_resource type="Resource" id="Resource_ps3td"]
+script = ExtResource("1_scbxq")
+line_id = &"suite"
+speaker = "Rudric"
+text = "Quand quelqu'un est trop touché par... tout ça, les symptômes s'arrêtent, une fois que c'est fini pour de bon. J'appelle ça de la pitié. Les autres appellent ça autre chose."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_7yjje")]([])
+
+[resource]
+script = ExtResource("3_ptwy7")
+id = &"rudric_intro"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_scbxq")]([SubResource("Resource_t1v0o"), SubResource("Resource_ps3td")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

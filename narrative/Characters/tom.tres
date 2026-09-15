@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_88qhh"]
+
+[resource]
+script = ExtResource("1_88qhh")
+id = &"tom"
+character_name = "Tom"
+age = 7
+personality = "extrêmement joyeux, innocent, curieux"
+schedule = Array[Dictionary]([])
+memories = Array[StringName]([])
+relationships = {}
+dialogue_tree_path = ""
+quest_ids = Array[StringName]([])
+death_conditions = Array[Dictionary]([])
+loop_state = {}
+placeholder_color = Color(0.95, 0.85, 0.3, 1)
+max_health = 15.0
+can_die = true

@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_kejn2"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_g0xs1"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_txq7c"]
+
+[sub_resource type="Resource" id="Resource_ecl3y"]
+script = ExtResource("2_g0xs1")
+text = "On m'a parlé de ton passé."
+target_line_id = &"passe"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = false
+
+[sub_resource type="Resource" id="Resource_4lg2w"]
+script = ExtResource("2_g0xs1")
+text = "Rien de spécial, je me présentais."
+target_line_id = &"rien"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = false
+
+[sub_resource type="Resource" id="Resource_m7tl1"]
+script = ExtResource("1_kejn2")
+line_id = &"intro"
+speaker = "Luc"
+text = "Si tu cherches les enfants du village, ils ne sont pas loin. Je garde un œil sur eux, histoire de rendre un peu de ce que j'ai pris."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/luc_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_g0xs1")]([SubResource("Resource_ecl3y"), SubResource("Resource_4lg2w")])
+
+[sub_resource type="Resource" id="Resource_t8gli"]
+script = ExtResource("1_kejn2")
+line_id = &"passe"
+speaker = "Luc"
+text = "Alors tu sais. Oui, j'ai volé. Un objet sacré, même. Et j'ai eu la chance qu'on me laisse devenir autre chose. Ça ne s'oublie pas facilement, ni pour moi, ni pour les autres."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_g0xs1")]([])
+
+[sub_resource type="Resource" id="Resource_2k8um"]
+script = ExtResource("1_kejn2")
+line_id = &"rien"
+speaker = "Luc"
+text = "Dans ce cas, bienvenue. Fais attention à toi ici."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_g0xs1")]([])
+
+[resource]
+script = ExtResource("3_txq7c")
+id = &"luc_intro"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_kejn2")]([SubResource("Resource_m7tl1"), SubResource("Resource_t8gli"), SubResource("Resource_2k8um")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

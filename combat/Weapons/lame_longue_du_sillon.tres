@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1_3aw7p"]
+[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1_s6pfq"]
 
 [resource]
-script = ExtResource("1_3aw7p")
+script = ExtResource("1_s6pfq")
 id = &"lame_longue_du_sillon"
 display_name = "Lame Longue du Sillon"
 category = 1

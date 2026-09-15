@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_t868c"]
+
+[resource]
+script = ExtResource("1_t868c")
+id = &"rudric"
+character_name = "Rudric"
+age = 38
+personality = "pense que tuer les personnes affectées par les glitches les empêche de souffrir ; étonnamment drôle"
+schedule = Array[Dictionary]([])
+memories = Array[StringName]([])
+relationships = {}
+dialogue_tree_path = ""
+quest_ids = Array[StringName]([])
+death_conditions = Array[Dictionary]([])
+loop_state = {}
+placeholder_color = Color(0.55, 0.15, 0.15, 1)
+max_health = 50.0
+can_die = true

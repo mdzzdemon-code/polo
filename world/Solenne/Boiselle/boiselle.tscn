@@ -1,7 +1,21 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
+[ext_resource type="PackedScene" path="res://world/NPC/npc.tscn" id="3"]
+[ext_resource type="Resource" path="res://narrative/Characters/tom.tres" id="10"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_tom_intro.tres" id="11"]
+[ext_resource type="Resource" path="res://narrative/Characters/romain.tres" id="12"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_romain_intro.tres" id="13"]
+[ext_resource type="Resource" path="res://narrative/Characters/victor.tres" id="14"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_victor_intro.tres" id="15"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_victor_apres_fragment.tres" id="16"]
+[ext_resource type="Resource" path="res://narrative/Characters/luc.tres" id="17"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_luc_intro.tres" id="18"]
+[ext_resource type="Resource" path="res://narrative/Characters/sacha.tres" id="19"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_sacha_intro.tres" id="20"]
+[ext_resource type="Resource" path="res://narrative/Characters/rudric.tres" id="21"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_rudric_intro.tres" id="22"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.4, 0.6, 0.85, 1)
@@ -111,6 +125,37 @@ rotation_degrees = Vector3(0, 180, 0)
 
 [node name="PlayerSpawn_FromPlaines" type="Marker3D" parent="."]
 position = Vector3(0, 0.1, -18)
+
+[node name="Tom" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+character_data = ExtResource("10")
+dialogue = ExtResource("11")
+
+[node name="Romain" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+character_data = ExtResource("12")
+dialogue = ExtResource("13")
+
+[node name="Victor" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+character_data = ExtResource("14")
+dialogue = ExtResource("15")
+dialogue_variants = [ExtResource("16")]
+
+[node name="Luc" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
+character_data = ExtResource("17")
+dialogue = ExtResource("18")
+
+[node name="Sacha" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+character_data = ExtResource("19")
+dialogue = ExtResource("20")
+
+[node name="Rudric" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9)
+character_data = ExtResource("21")
+dialogue = ExtResource("22")
 
 [node name="ToForet" type="Area3D" parent="."]
 position = Vector3(0, 1, 20)

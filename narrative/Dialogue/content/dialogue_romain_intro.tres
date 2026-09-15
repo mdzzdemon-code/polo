@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_lvjdy"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_wpqdn"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_b32ca"]
+
+[sub_resource type="Resource" id="Resource_evvns"]
+script = ExtResource("2_wpqdn")
+text = "Quelle présence ?"
+target_line_id = &"presence"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = false
+
+[sub_resource type="Resource" id="Resource_xq7qk"]
+script = ExtResource("2_wpqdn")
+text = "Rien, laisse tomber."
+target_line_id = &"ignore"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+required_keyword_tag = &""
+ends_dialogue = false
+
+[sub_resource type="Resource" id="Resource_80hjj"]
+script = ExtResource("1_lvjdy")
+line_id = &"intro"
+speaker = "Romain"
+text = "Bienvenue à Boiselle, étranger. Je veille sur cette région du mieux que je peux. N'hésite pas si tu as besoin de quoi que ce soit."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([&"event/romain_met"])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_wpqdn")]([SubResource("Resource_evvns"), SubResource("Resource_xq7qk")])
+
+[sub_resource type="Resource" id="Resource_ack3w"]
+script = ExtResource("1_lvjdy")
+line_id = &"presence"
+speaker = "Romain"
+text = "...Rien. Disons simplement qu'il y a des choses anciennes, du côté de la montagne, que je préfère ne pas déranger. Je ne la connais pas. Je sais seulement qu'elle existe."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_wpqdn")]([])
+
+[sub_resource type="Resource" id="Resource_khyl6"]
+script = ExtResource("1_lvjdy")
+line_id = &"ignore"
+speaker = "Romain"
+text = "Comme tu veux. Passe une bonne journée."
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_wpqdn")]([])
+
+[resource]
+script = ExtResource("3_b32ca")
+id = &"romain_intro"
+start_line_id = &"intro"
+lines = Array[ExtResource("1_lvjdy")]([SubResource("Resource_80hjj"), SubResource("Resource_ack3w"), SubResource("Resource_khyl6")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

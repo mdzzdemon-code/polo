@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_k35uh"]
+
+[resource]
+script = ExtResource("1_k35uh")
+id = &"sacha"
+character_name = "Sacha"
+age = 15
+personality = "en crise familiale et émotionnelle ; hostile au premier abord ; facilement manqué"
+schedule = Array[Dictionary]([])
+memories = Array[StringName]([])
+relationships = {}
+dialogue_tree_path = ""
+quest_ids = Array[StringName]([])
+death_conditions = Array[Dictionary]([])
+loop_state = {}
+placeholder_color = Color(0.4, 0.55, 0.4, 1)
+max_health = 30.0
+can_die = true

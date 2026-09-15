@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_yejv3"]
+
+[resource]
+script = ExtResource("1_yejv3")
+id = &"luc"
+character_name = "Luc"
+age = 41
+personality = "ancien voleur devenu quelqu'un de bien ; aide les enfants ; hanté par une possible rechute"
+schedule = Array[Dictionary]([])
+memories = Array[StringName]([])
+relationships = {}
+dialogue_tree_path = ""
+quest_ids = Array[StringName]([])
+death_conditions = Array[Dictionary]([])
+loop_state = {}
+placeholder_color = Color(0.5, 0.4, 0.3, 1)
+max_health = 45.0
+can_die = true
