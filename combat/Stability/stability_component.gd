@@ -43,3 +43,10 @@ func recover_from_break() -> void:
 	is_broken = false
 	current_stability = max_stability * 0.5
 	changed.emit(current_stability, max_stability)
+
+
+func reset() -> void:
+	is_broken = false
+	_time_since_hit = 0.0
+	current_stability = max_stability
+	changed.emit(current_stability, max_stability)

@@ -32,6 +32,7 @@ EndingManager="*res://narrative/Endings/ending_manager.gd"
 ConsequenceManager="*res://reality/Consequences/consequence_manager.gd"
 ContentRegistry="*res://core/content_registry.gd"
 AudioManager="*res://audio/audio_manager.gd"
+UIManager="*res://ui/Menus/ui_manager.gd"
 
 [audio]
 

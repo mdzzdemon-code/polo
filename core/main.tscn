@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://core/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://player/player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://ui/HUD/hud.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://ui/Dialogue/dialogue_ui.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://ui/Inventory/inventory_ui.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://ui/CarnetAnomalie/carnet_anomalie_ui.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://ui/CarnetRealite/carnet_realite_ui.tscn" id="7"]
+[ext_resource type="Script" path="res://ui/Menus/menu_hotkeys.gd" id="8"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1")
@@ -17,3 +21,12 @@ script = ExtResource("1")
 [node name="HUD" parent="UI" instance=ExtResource("3")]
 
 [node name="DialogueUI" parent="UI" instance=ExtResource("4")]
+
+[node name="InventoryUI" parent="UI" instance=ExtResource("5")]
+
+[node name="CarnetAnomalieUI" parent="UI" instance=ExtResource("6")]
+
+[node name="CarnetRealiteUI" parent="UI" instance=ExtResource("7")]
+
+[node name="MenuHotkeys" type="Node" parent="."]
+script = ExtResource("8")
