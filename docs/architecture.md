@@ -84,7 +84,27 @@ combat, etc.).
 - [x] Étape 1 — Projet Godot initialisé (`project.godot`, rendu Forward+, 3D).
 - [x] Étape 2 — Arborescence de dossiers posée, autoloads squelettes en place,
       gabarit de données `CharacterData`.
-- [x] Étapes 3 à 23 — voir `docs/GDD.md` § Feuille de route.
+- [x] Étapes 3 à 25 — voir `docs/GDD.md` § Feuille de route. Prototype complet :
+      tous les systèmes du GDD sont implémentés en GDScript fonctionnel, avec
+      géométrie primitive à la place des modèles 3D, quelques SFX/musique
+      procéduraux minimalistes (pas de composition audio réelle), et un
+      contenu narratif représentatif plutôt qu'exhaustif (chaque personnage a
+      au moins un dialogue, pas encore une écriture complète de bout en bout).
+
+## Build
+
+Export configuré via `export_presets.cfg` (suivi par git, contrairement aux
+binaires produits) pour deux cibles : Linux x86_64 et Windows x86_64, toutes
+deux testées avec le binaire Godot 4.3 headless :
+
+```
+godot --headless --path . --export-release "Linux" build/linux/paradoxe_echo.x86_64
+godot --headless --path . --export-release "Windows" build/windows/paradoxe_echo.exe
+```
+
+Le binaire Linux exporté a été relancé (`--headless --quit-after`) pour
+confirmer que le build packagé démarre proprement, pas seulement le projet en
+mode éditeur.
 
 ## Notes de validation (headless)
 
