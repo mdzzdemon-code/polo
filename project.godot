@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are meant to be edited
+; using the UI and not by hand, although you can also do it.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Le Paradoxe de l'Écho"
+config/description="Un RPG d'action en 3D où une Anomalie coincée dans des boucles temporelles de trois jours tente de comprendre son passé et de sauver un monde qu'elle ne connaît pas vraiment."
+run/main_scene=""
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://core/game_manager.gd"
+TimeManager="*res://core/time_manager.gd"
+LoopManager="*res://core/loop_manager.gd"
+RealityManager="*res://core/reality_manager.gd"
+MemoryManager="*res://core/memory_manager.gd"
+SaveManager="*res://core/save_manager.gd"
+EventManager="*res://core/event_manager.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=2
