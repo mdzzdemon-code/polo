@@ -96,7 +96,9 @@ func receive_hit(amount: float, _poise_damage: float, _attacker: Node, _weapon: 
 func die() -> void:
 	is_dead = true
 	if character_data:
-		ConsequenceManager.apply("npc/%s/dead" % character_data.id)
+		# A PNJ death is exactly the kind of consequence that should nudge the
+		# world's degradation — causality, not a scripted "day 2 = dark" flip.
+		ConsequenceManager.apply("npc/%s/dead" % character_data.id, 1)
 	died.emit()
 	hide()
 	set_physics_process(false)

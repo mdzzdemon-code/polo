@@ -34,7 +34,7 @@ func advance() -> void:
 func choose(choice: DialogueChoice) -> void:
 	for f in choice.sets_flags:
 		EventManager.set_flag(f)
-	_apply_effects(choice.grants_item_id, choice.grants_keyword_id, choice.starts_quest_id)
+	_apply_effects(choice.grants_item_id, choice.grants_keyword_id, choice.starts_quest_id, choice.completes_quest_id)
 	if choice.ends_dialogue or choice.target_line_id == &"":
 		end_dialogue()
 	else:
@@ -55,7 +55,7 @@ func _show_line(line: DialogueLine) -> void:
 	current_line = line
 	for f in line.sets_flags:
 		EventManager.set_flag(f)
-	_apply_effects(line.grants_item_id, line.grants_keyword_id, line.starts_quest_id)
+	_apply_effects(line.grants_item_id, line.grants_keyword_id, line.starts_quest_id, line.completes_quest_id)
 	if line.triggers_glitch:
 		RealityManager.trigger_glitch(line.line_id)
 	var valid_choices: Array[DialogueChoice] = []
@@ -69,7 +69,7 @@ func _flags_ok(required: Array[StringName], forbidden: Array[StringName]) -> boo
 	return EventManager.has_all_flags(required) and not EventManager.has_any_flag(forbidden)
 
 
-func _apply_effects(item_id: StringName, keyword_id: StringName, quest_id: StringName) -> void:
+func _apply_effects(item_id: StringName, keyword_id: StringName, starts_quest: StringName, completes_quest: StringName) -> void:
 	var player: Player = GameManager.player
 	if item_id != &"" and player:
 		var item := ContentRegistry.get_item(item_id)
@@ -79,8 +79,10 @@ func _apply_effects(item_id: StringName, keyword_id: StringName, quest_id: Strin
 		var keyword := ContentRegistry.get_keyword(keyword_id)
 		if keyword:
 			player.keywords.learn(keyword)
-	if quest_id != &"":
-		QuestManager.discover(quest_id)
+	if starts_quest != &"":
+		QuestManager.discover(starts_quest)
+	if completes_quest != &"":
+		QuestManager.complete(completes_quest)
 
 
 func _choice_ok(choice: DialogueChoice) -> bool:

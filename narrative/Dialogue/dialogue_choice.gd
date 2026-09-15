@@ -10,5 +10,6 @@ class_name DialogueChoice
 @export var grants_item_id: StringName
 @export var grants_keyword_id: StringName
 @export var starts_quest_id: StringName
+@export var completes_quest_id: StringName
 @export var required_keyword_tag: StringName # gated by an equipped KeywordData.dialogue_tag
 @export var ends_dialogue: bool = false

@@ -11,6 +11,7 @@ class_name DialogueLine
 @export var grants_item_id: StringName # optional ItemData id auto-added to inventory
 @export var grants_keyword_id: StringName # optional KeywordData id learned
 @export var starts_quest_id: StringName # optional QuestData id marked discovered
+@export var completes_quest_id: StringName
 @export var triggers_glitch: bool = false
 @export var auto_next_line_id: StringName
 @export var choices: Array[DialogueChoice] = []

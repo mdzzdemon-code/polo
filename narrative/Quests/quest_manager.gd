@@ -12,6 +12,29 @@ var completed_quests: Array[StringName] = []
 var failed_quests: Array[StringName] = []
 
 
+func _ready() -> void:
+	EventManager.flag_changed.connect(func(_f, _v): _reevaluate_all())
+	TimeManager.hour_changed.connect(func(_h): _reevaluate_all())
+	TimeManager.day_changed.connect(func(_d): _reevaluate_all())
+
+
+func _reevaluate_all() -> void:
+	# The world doesn't wait for the player to check a quest log — a window
+	# closing or a failure flag firing silently fails it in the background.
+	for qid in discovered_quests.duplicate():
+		if qid in completed_quests or qid in failed_quests:
+			continue
+		var q: QuestData = all_quests.get(qid)
+		if q == null:
+			continue
+		if EventManager.has_any_flag(q.failure_flags):
+			fail(qid)
+		elif TimeManager.day > q.available_until_day:
+			fail(qid)
+		elif TimeManager.day == q.available_until_day and TimeManager.hour() > q.available_until_hour:
+			fail(qid)
+
+
 func register_quest(quest: QuestData) -> void:
 	all_quests[quest.id] = quest
 
