@@ -109,6 +109,7 @@ func _resolve_attack_hits() -> void:
 		if keywords and target.has_method("get_weakness_tags"):
 			mult = keywords.damage_multiplier_against(target.get_weakness_tags())
 		target.receive_hit(weapon.damage * mult, weapon.poise_damage, player, weapon)
+		AudioManager.play_sfx("hit")
 
 
 func _try_dodge() -> void:
@@ -116,6 +117,7 @@ func _try_dodge() -> void:
 	_state_timer = dodge_duration
 	is_invulnerable = true
 	dodged.emit()
+	AudioManager.play_sfx("dodge")
 	var dir: Vector3 = player.velocity
 	dir.y = 0.0
 	if dir.length() < 0.1:
@@ -174,6 +176,7 @@ func receive_hit(amount: float, poise_damage: float, attacker: Node, weapon: Wea
 		return
 	if state == "parrying" and weapon != null and weapon.can_be_parried:
 		parry_succeeded.emit()
+		AudioManager.play_sfx("parry")
 		if attacker and attacker.has_method("receive_hit"):
 			attacker.receive_hit(0.0, poise_damage * 2.0, player)
 		return

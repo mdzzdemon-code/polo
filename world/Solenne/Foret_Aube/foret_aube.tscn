@@ -48,6 +48,7 @@ size = Vector3(6, 4, 2)
 [node name="ForetAube" type="Node3D"]
 script = ExtResource("1")
 region_id = &"foret_aube"
+ambient_music_path = "res://audio/Music/ambient_placeholder.wav"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")

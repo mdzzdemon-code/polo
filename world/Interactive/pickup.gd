@@ -16,6 +16,7 @@ func interact(player: Player) -> void:
 	if item == null:
 		return
 	player.inventory.add_item(item, quantity)
+	AudioManager.play_sfx("pickup")
 	EventManager.fire("item_picked_up", {"item_id": item.id})
 	hide()
 	set_deferred("monitoring", false)

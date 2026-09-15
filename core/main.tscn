@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://ui/CarnetRealite/carnet_realite_ui.tscn" id="7"]
 [ext_resource type="Script" path="res://ui/Menus/menu_hotkeys.gd" id="8"]
 [ext_resource type="PackedScene" path="res://ui/Menus/ending_screen.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://reality/Glitches/glitch_vfx.tscn" id="10"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1")
@@ -28,6 +29,8 @@ script = ExtResource("1")
 [node name="CarnetAnomalieUI" parent="UI" instance=ExtResource("6")]
 
 [node name="CarnetRealiteUI" parent="UI" instance=ExtResource("7")]
+
+[node name="GlitchVFX" parent="UI" instance=ExtResource("10")]
 
 [node name="EndingScreen" parent="UI" instance=ExtResource("9")]
 

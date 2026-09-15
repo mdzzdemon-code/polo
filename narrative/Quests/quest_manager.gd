@@ -68,6 +68,7 @@ func complete(quest_id: StringName) -> void:
 		return
 	completed_quests.append(quest_id)
 	EventManager.set_flag("quest/%s/completed" % quest_id)
+	AudioManager.play_sfx("quest_complete")
 	var q: QuestData = all_quests.get(quest_id)
 	if q:
 		if q.reward_memory_id != &"":

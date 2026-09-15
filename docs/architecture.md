@@ -84,4 +84,17 @@ combat, etc.).
 - [x] Étape 1 — Projet Godot initialisé (`project.godot`, rendu Forward+, 3D).
 - [x] Étape 2 — Arborescence de dossiers posée, autoloads squelettes en place,
       gabarit de données `CharacterData`.
-- [ ] Étape 3 et suivantes — voir `docs/GDD.md` § Feuille de route.
+- [x] Étapes 3 à 23 — voir `docs/GDD.md` § Feuille de route.
+
+## Notes de validation (headless)
+
+Deux artefacts inoffensifs apparaissent en environnement `--headless` (pas de GPU) et
+ne sont pas des bugs du projet :
+- `ERROR: Parameter "m" is null. at: mesh_get_surface_count` — le rendu "dummy"
+  headless n'a pas de mesh storage réel ; reproductible avec n'importe quel
+  `MeshInstance3D`, y compris dans un projet Godot minimal vierge.
+- `WARNING: ObjectDB instances leaked at exit` / `1 resources still in use at exit`
+  — apparaît uniquement quand un `AudioStreamPlayer` est encore en train de jouer
+  au moment d'un arrêt forcé (`--quit-after`) ; confirmé en isolant la piste
+  d'ambiance du forêt et en observant que l'avertissement disparaît sans elle.
+  N'apparaît pas lors d'un arrêt normal du jeu.

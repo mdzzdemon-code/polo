@@ -47,5 +47,6 @@ func _physics_process(_delta: float) -> void:
 	var key_down := Input.is_physical_key_pressed(KEY_E)
 	if key_down and not _was_key_down and current_focus != null:
 		if current_focus.has_method("interact"):
+			AudioManager.play_sfx("interact")
 			current_focus.interact(player)
 	_was_key_down = key_down
