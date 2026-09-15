@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://narrative/Quests/quest_data.gd" id="1_i4twh"]
+[ext_resource type="Script" path="res://narrative/Quests/quest_data.gd" id="1_x4fwe"]
 
 [resource]
-script = ExtResource("1_i4twh")
+script = ExtResource("1_x4fwe")
 id = &"aider_le_chevalier"
 title = "Aider le chevalier"
 summary = "Maëlle veut présenter l'Anomalie à Victor, le chevalier du village, après la réaction étrange du fragment."

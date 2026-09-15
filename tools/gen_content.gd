@@ -8,8 +8,69 @@ extends SceneTree
 
 func _init() -> void:
 	gen_maelle()
+	gen_combat_content()
 	print("Content generation complete.")
 	quit()
+
+
+func gen_combat_content() -> void:
+	var heavy := WeaponData.new()
+	heavy.id = &"lame_longue_du_sillon"
+	heavy.display_name = "Lame Longue du Sillon"
+	heavy.category = WeaponData.Category.HEAVY
+	heavy.damage = 22.0
+	heavy.attack_speed = 0.7
+	heavy.stamina_cost = 28.0
+	heavy.range = 2.6
+	heavy.poise_damage = 18.0
+	heavy.can_be_parried = true
+	heavy.placeholder_color = Color(0.5, 0.5, 0.55, 1.0)
+	heavy.description = "Une lame lourde à deux mains. Lente, mais elle brise la stabilité en quelques coups."
+	ResourceSaver.save(heavy, "res://combat/Weapons/lame_longue_du_sillon.tres")
+
+	var ranged := WeaponData.new()
+	ranged.id = &"arc_des_echos"
+	ranged.display_name = "Arc des Échos"
+	ranged.category = WeaponData.Category.RANGED
+	ranged.damage = 14.0
+	ranged.attack_speed = 1.1
+	ranged.stamina_cost = 16.0
+	ranged.range = 9.0
+	ranged.poise_damage = 8.0
+	ranged.can_be_parried = false
+	ranged.placeholder_color = Color(0.6, 0.45, 0.25, 1.0)
+	ranged.description = "Un arc ancien. Prototype : résolution instantanée (hit-scan), sans flèche physique animée pour l'instant."
+	ResourceSaver.save(ranged, "res://combat/Weapons/arc_des_echos.tres")
+
+	var peur_muette := TraumaData.new()
+	peur_muette.id = &"peur_muette"
+	peur_muette.display_name = "La Peur Muette"
+	peur_muette.symbolism = "Une silhouette qui recule sans cesse mais qui frappe dès qu'on s'approche trop vite — la peur qu'on tente de fuir finit par se retourner contre soi."
+	peur_muette.max_health = 55.0
+	peur_muette.max_stability = 40.0
+	peur_muette.move_speed = 3.2
+	peur_muette.attack_damage = 9.0
+	peur_muette.attack_range = 2.2
+	peur_muette.detection_range = 9.0
+	peur_muette.behavior = TraumaData.Behavior.SKITTISH
+	peur_muette.weaknesses = [&"peur"]
+	peur_muette.placeholder_color = Color(0.55, 0.2, 0.35, 1.0)
+	ResourceSaver.save(peur_muette, "res://combat/Traumas/peur_muette.tres")
+
+	var poids_silence := TraumaData.new()
+	poids_silence.id = &"poids_du_silence"
+	poids_silence.display_name = "Le Poids du Silence"
+	poids_silence.symbolism = "Une masse immobile qui ne bouge pas tant qu'on ne l'approche pas — jusqu'à ce qu'il soit trop tard pour reculer."
+	poids_silence.max_health = 80.0
+	poids_silence.max_stability = 60.0
+	poids_silence.move_speed = 2.2
+	poids_silence.attack_damage = 14.0
+	poids_silence.attack_range = 2.4
+	poids_silence.detection_range = 12.0
+	poids_silence.behavior = TraumaData.Behavior.SENTINEL
+	poids_silence.weaknesses = []
+	poids_silence.placeholder_color = Color(0.25, 0.25, 0.3, 1.0)
+	ResourceSaver.save(poids_silence, "res://combat/Traumas/poids_du_silence.tres")
 
 
 func gen_maelle() -> void:

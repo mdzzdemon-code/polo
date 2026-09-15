@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1_3aw7p"]
+
+[resource]
+script = ExtResource("1_3aw7p")
+id = &"lame_longue_du_sillon"
+display_name = "Lame Longue du Sillon"
+category = 1
+damage = 22.0
+attack_speed = 0.7
+stamina_cost = 28.0
+range = 2.6
+poise_damage = 18.0
+can_be_parried = true
+placeholder_color = Color(0.5, 0.5, 0.55, 1)
+description = "Une lame lourde à deux mains. Lente, mais elle brise la stabilité en quelques coups."

@@ -30,6 +30,7 @@ func start_new_loop() -> void:
 	loop_number += 1
 	TimeManager.reset_for_new_loop()
 	EventManager.clear_loop_scoped_flags()
+	SynapseLink.reset_for_loop()
 	var player := GameManager.player
 	if player:
 		player.health = player.max_health

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://combat/Traumas/trauma.gd" id="1"]
+[ext_resource type="Script" path="res://combat/Stability/stability_component.gd" id="2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.5
+height = 2.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 0.5
+height = 2.1
+
+[node name="Trauma" type="CharacterBody3D"]
+script = ExtResource("1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.05, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="BodyMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BodyMesh"]
+position = Vector3(0, 1.05, 0)
+mesh = SubResource("CapsuleMesh_1")
+
+[node name="Stability" type="Node" parent="."]
+script = ExtResource("2")

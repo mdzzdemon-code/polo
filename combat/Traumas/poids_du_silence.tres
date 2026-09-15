@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TraumaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_sn2if"]
+
+[resource]
+script = ExtResource("1_sn2if")
+id = &"poids_du_silence"
+display_name = "Le Poids du Silence"
+symbolism = "Une masse immobile qui ne bouge pas tant qu'on ne l'approche pas — jusqu'à ce qu'il soit trop tard pour reculer."
+max_health = 80.0
+max_stability = 60.0
+move_speed = 2.2
+attack_damage = 14.0
+attack_range = 2.4
+detection_range = 12.0
+behavior = 2
+weaknesses = Array[StringName]([])
+placeholder_color = Color(0.25, 0.25, 0.3, 1)
+spawn_condition_tag = &""

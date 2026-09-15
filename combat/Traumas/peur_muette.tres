@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TraumaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_yokml"]
+
+[resource]
+script = ExtResource("1_yokml")
+id = &"peur_muette"
+display_name = "La Peur Muette"
+symbolism = "Une silhouette qui recule sans cesse mais qui frappe dès qu'on s'approche trop vite — la peur qu'on tente de fuir finit par se retourner contre soi."
+max_health = 55.0
+max_stability = 40.0
+move_speed = 3.2
+attack_damage = 9.0
+attack_range = 2.2
+detection_range = 9.0
+behavior = 1
+weaknesses = Array[StringName]([&"peur"])
+placeholder_color = Color(0.55, 0.2, 0.35, 1)
+spawn_condition_tag = &""

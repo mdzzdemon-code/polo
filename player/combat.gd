@@ -125,6 +125,15 @@ func _try_dodge() -> void:
 	player.velocity = dir * dodge_speed
 	get_tree().create_timer(dodge_iframe_time).timeout.connect(func(): is_invulnerable = false)
 
+	if lock_on_target and lock_on_target.has_method("get_trauma_id"):
+		var lateral := ""
+		if Input.is_physical_key_pressed(KEY_A):
+			lateral = "left"
+		elif Input.is_physical_key_pressed(KEY_D):
+			lateral = "right"
+		if lateral != "":
+			SynapseLink.record_dodge(lock_on_target.get_trauma_id(), lateral)
+
 
 func _try_parry() -> void:
 	state = "parrying"

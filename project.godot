@@ -33,6 +33,7 @@ ConsequenceManager="*res://reality/Consequences/consequence_manager.gd"
 ContentRegistry="*res://core/content_registry.gd"
 AudioManager="*res://audio/audio_manager.gd"
 UIManager="*res://ui/Menus/ui_manager.gd"
+SynapseLink="*res://combat/SynapseLink/synapse_link.gd"
 
 [audio]
 
