@@ -6,6 +6,7 @@ extends Node
 
 signal mode_changed(mode: Mode)
 signal region_changed(region_path: String)
+signal player_registered(player: Player)
 
 enum Mode { EXPLORATION, COMBAT, DIALOGUE, CUTSCENE, MENU }
 
@@ -26,6 +27,7 @@ func set_mode(mode: Mode) -> void:
 func register_world(container: Node3D, player_node: Player) -> void:
 	world_container = container
 	player = player_node
+	player_registered.emit(player_node)
 
 
 func change_region(scene_path: String, spawn_point: StringName = &"PlayerSpawn") -> void:

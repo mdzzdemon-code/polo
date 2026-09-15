@@ -14,3 +14,6 @@ class_name CharacterData
 @export var quest_ids: Array[StringName] = []
 @export var death_conditions: Array[Dictionary] = []
 @export var loop_state: Dictionary = {} # per-loop overrides (position, alive, variant, ...)
+@export var placeholder_color: Color = Color.WHITE
+@export var max_health: float = 30.0
+@export var can_die: bool = true

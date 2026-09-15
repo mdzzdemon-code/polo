@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="KeywordData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://combat/Keywords/keyword_data.gd" id="1_45j7k"]
+
+[resource]
+script = ExtResource("1_45j7k")
+id = &"curiosite"
+display_name = "Curiosité"
+concept = "Ce qui pousse à comprendre plutôt qu'à fuir."
+description = "Un mot appris auprès de Maëlle. Rend certains dialogues et certaines faiblesses accessibles."
+damage_multiplier_vs_tag = 1.3
+vs_trauma_tag = &"peur"
+dialogue_tag = &"curiosite"

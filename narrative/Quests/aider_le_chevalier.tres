@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Quests/quest_data.gd" id="1_i4twh"]
+
+[resource]
+script = ExtResource("1_i4twh")
+id = &"aider_le_chevalier"
+title = "Aider le chevalier"
+summary = "Maëlle veut présenter l'Anomalie à Victor, le chevalier du village, après la réaction étrange du fragment."
+giver_character_id = &"maelle"
+available_from_day = 1
+available_until_day = 3
+available_from_hour = 0
+available_until_hour = 24
+required_flags = Array[StringName]([])
+failure_flags = Array[StringName]([])
+reward_memory_id = &""
+reward_item_ids = Array[StringName]([])

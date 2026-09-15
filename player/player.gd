@@ -23,6 +23,9 @@ var health: float
 func _ready() -> void:
 	health = max_health
 	stability.broken.connect(_on_stability_broken)
+	var starting_weapon := ContentRegistry.get_weapon(&"dague_ecarts")
+	if starting_weapon:
+		combat.equipped_weapon = starting_weapon
 
 
 func take_damage(amount: float, _attacker: Node = null) -> void:

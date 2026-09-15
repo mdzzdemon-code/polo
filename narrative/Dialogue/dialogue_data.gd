@@ -5,6 +5,8 @@ class_name DialogueData
 @export var id: StringName
 @export var start_line_id: StringName
 @export var lines: Array[DialogueLine] = []
+@export var required_flags: Array[StringName] = [] # used when picking between an NPC's dialogue variants
+@export var forbidden_flags: Array[StringName] = []
 
 
 func find_line(line_id: StringName) -> DialogueLine:

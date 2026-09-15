@@ -1,9 +1,12 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="PackedScene" path="res://world/Environment/tree_placeholder.tscn" id="2"]
 [ext_resource type="Script" path="res://reality/Glitches/glitch_trigger.gd" id="3"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="4"]
+[ext_resource type="PackedScene" path="res://world/NPC/npc.tscn" id="5"]
+[ext_resource type="Resource" path="res://narrative/Characters/maelle.tres" id="6"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_maelle_premiere_rencontre.tres" id="7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.35, 0.55, 0.85, 1)
@@ -113,6 +116,19 @@ position = Vector3(2, 0, 20)
 
 [node name="Tree12" parent="." instance=ExtResource("2")]
 position = Vector3(-20, 0, -6)
+
+[node name="MaelleSpotDay" type="Marker3D" parent="."]
+position = Vector3(3, 0.1, 4)
+
+[node name="MaelleSpotEvening" type="Marker3D" parent="."]
+position = Vector3(-3, 0.1, 12)
+
+[node name="Maelle" parent="." instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+character_data = ExtResource("6")
+dialogue = ExtResource("7")
+schedule_markers = [NodePath("../MaelleSpotDay"), NodePath("../MaelleSpotEvening")]
+schedule_hours = [6, 19]
 
 [node name="FirstGlitch" type="Area3D" parent="."]
 position = Vector3(0, 1, 0)
