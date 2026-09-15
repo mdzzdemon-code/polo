@@ -31,5 +31,6 @@ func trigger_if_ready() -> bool:
 	if ending:
 		ending_locked = true
 		ending_reached.emit(ending)
+		SaveManager.save_game()
 		return true
 	return false

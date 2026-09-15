@@ -39,3 +39,4 @@ func start_new_loop() -> void:
 		player.inventory.clear_loop_scoped_items()
 	loop_started.emit(loop_number)
 	GameManager.change_region(LOOP_START_SCENE)
+	SaveManager.save_game()

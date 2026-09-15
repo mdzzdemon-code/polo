@@ -39,6 +39,16 @@ func has_any_flag(flags: Array[StringName]) -> bool:
 	return false
 
 
+func get_all_flags() -> Dictionary:
+	return _flags.duplicate()
+
+
+func load_flags(flags: Dictionary) -> void:
+	_flags.clear()
+	for k in flags.keys():
+		_flags[StringName(k)] = flags[k]
+
+
 func clear_loop_scoped_flags(prefix: StringName = &"loop/") -> void:
 	# Called by LoopManager on reset: flags namespaced "loop/..." don't survive a reset,
 	# everything else (discoveries, memories-related flags) does.
