@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EndingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Endings/ending_data.gd" id="1_n1lad"]
+
+[resource]
+script = ExtResource("1_n1lad")
+id = &"fin_degradation"
+title = "Fin — Trop tard"
+description = "Le monde s'est effondré avant que l'Anomalie n'ait pu comprendre ce qu'elle était censée faire. La boucle recommence, mais quelque chose d'essentiel a déjà été perdu — et cette fois, il ne reste presque rien à sauver."
+required_flags = Array[StringName]([&"reality/degradation_critical"])
+forbidden_flags = Array[StringName]([&"ending/sacrifice_accepted", &"ending/sacrifice_refused"])
+priority = 75
+is_true_ending = false

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="KeywordData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://combat/Keywords/keyword_data.gd" id="1_ghjrs"]
+[ext_resource type="Script" path="res://combat/Keywords/keyword_data.gd" id="1_lc4rt"]
 
 [resource]
-script = ExtResource("1_ghjrs")
+script = ExtResource("1_lc4rt")
 id = &"curiosite"
 display_name = "Curiosité"
 concept = "Ce qui pousse à comprendre plutôt qu'à fuir."

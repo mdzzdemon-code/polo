@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
 [ext_resource type="PackedScene" path="res://world/NPC/npc.tscn" id="3"]
 [ext_resource type="Resource" path="res://narrative/Characters/aelia.tres" id="4"]
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_aelia_intro.tres" id="5"]
+[ext_resource type="Script" path="res://world/Interactive/dialogue_interactable.gd" id="6"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_altar_pas_pret.tres" id="7"]
+[ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_altar_choix_final.tres" id="8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
 sky_top_color = Color(0.28, 0.2, 0.4, 1)
@@ -57,6 +60,9 @@ emission_energy_multiplier = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_transition"]
 size = Vector3(6, 4, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_altar"]
+radius = 2.0
 
 [node name="SanctuaireSeuil" type="Node3D"]
 script = ExtResource("1")
@@ -131,6 +137,16 @@ shape = SubResource("BoxShape3D_altar")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Altar"]
 mesh = SubResource("BoxMesh_altar")
 surface_material_override/0 = SubResource("Material_altar")
+
+[node name="AltarInteraction" type="Area3D" parent="Altar"]
+script = ExtResource("6")
+dialogue = ExtResource("7")
+dialogue_variants = [ExtResource("8")]
+prompt_text = "Toucher l'autel"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Altar/AltarInteraction"]
+shape = SubResource("SphereShape3D_altar")
 
 [node name="PlayerSpawn" type="Marker3D" parent="."]
 position = Vector3(0, 0.1, 14)

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_t868c"]
+[ext_resource type="Script" path="res://narrative/Characters/character_data.gd" id="1_1mttv"]
 
 [resource]
-script = ExtResource("1_t868c")
+script = ExtResource("1_1mttv")
 id = &"rudric"
 character_name = "Rudric"
 age = 38

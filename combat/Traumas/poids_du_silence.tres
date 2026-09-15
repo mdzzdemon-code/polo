@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="TraumaData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_8hd1c"]
+[ext_resource type="Script" path="res://combat/Traumas/trauma_data.gd" id="1_287yr"]
 
 [resource]
-script = ExtResource("1_8hd1c")
+script = ExtResource("1_287yr")
 id = &"poids_du_silence"
 display_name = "Le Poids du Silence"
 symbolism = "Une masse immobile qui ne bouge pas tant qu'on ne l'approche pas — jusqu'à ce qu'il soit trop tard pour reculer."

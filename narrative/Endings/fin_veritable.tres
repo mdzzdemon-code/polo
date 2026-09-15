@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EndingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Endings/ending_data.gd" id="1_i0oqg"]
+
+[resource]
+script = ExtResource("1_i0oqg")
+id = &"fin_veritable"
+title = "Fin véritable — L'Écho s'efface"
+description = "L'Anomalie sauve les habitants, sauve la réalité, arrête les boucles, et accepte de disparaître. Personne ne se souvient réellement de qui elle était. Elle regarde une dernière fois le monde qu'elle a sauvé. Elle sourit. Puis disparaît. Le monde continue — et quelque part, sans savoir pourquoi, certains ressentent une impression, une habitude inexplicable, une émotion qu'ils ne comprennent pas."
+required_flags = Array[StringName]([&"ending/sacrifice_accepted"])
+forbidden_flags = Array[StringName]([])
+priority = 100
+is_true_ending = true

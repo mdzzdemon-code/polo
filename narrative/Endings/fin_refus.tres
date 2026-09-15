@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EndingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://narrative/Endings/ending_data.gd" id="1_cjaiw"]
+
+[resource]
+script = ExtResource("1_cjaiw")
+id = &"fin_refus"
+title = "Fin — Le refus"
+description = "L'Anomalie refuse de disparaître. La boucle ne se brise pas. Quelque part, un fragment de lumière continue de chercher, encore et encore, un monde qui ne finira jamais tout à fait de se souvenir de lui-même."
+required_flags = Array[StringName]([&"ending/sacrifice_refused"])
+forbidden_flags = Array[StringName]([])
+priority = 50
+is_true_ending = false

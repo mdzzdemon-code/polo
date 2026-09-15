@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_gfqdc"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_bps5u"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_0meav"]
+
+[sub_resource type="Resource" id="Resource_r73rr"]
+script = ExtResource("1_gfqdc")
+line_id = &"pas_pret"
+speaker = ""
+text = "(L'autel est froid et silencieux. Il ne se passe rien — pas encore.)"
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])
+sets_flags = Array[StringName]([])
+grants_item_id = &""
+grants_keyword_id = &""
+starts_quest_id = &""
+completes_quest_id = &""
+triggers_glitch = false
+auto_next_line_id = &""
+choices = Array[ExtResource("2_bps5u")]([])
+
+[resource]
+script = ExtResource("3_0meav")
+id = &"altar_pas_pret"
+start_line_id = &"pas_pret"
+lines = Array[ExtResource("1_gfqdc")]([SubResource("Resource_r73rr")])
+required_flags = Array[StringName]([])
+forbidden_flags = Array[StringName]([])

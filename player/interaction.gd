@@ -14,6 +14,13 @@ var _was_key_down: bool = false
 
 
 func _physics_process(_delta: float) -> void:
+	var mode := GameManager.current_mode
+	if mode == GameManager.Mode.DIALOGUE or mode == GameManager.Mode.MENU or mode == GameManager.Mode.CUTSCENE:
+		if current_focus != null:
+			current_focus = null
+			focus_changed.emit(null)
+		return
+
 	var best: Node = null
 	var best_dist := INF
 	for interactable in get_tree().get_nodes_in_group("interactable"):

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_75kub"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_2fbk1"]
-[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_38yr4"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_line.gd" id="1_eckeh"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_choice.gd" id="2_87y6a"]
+[ext_resource type="Script" path="res://narrative/Dialogue/dialogue_data.gd" id="3_u0v68"]
 
-[sub_resource type="Resource" id="Resource_64fc4"]
-script = ExtResource("2_2fbk1")
+[sub_resource type="Resource" id="Resource_bfbrd"]
+script = ExtResource("2_87y6a")
 text = "Parfois, oui."
 target_line_id = &"reponse_oui"
 required_flags = Array[StringName]([])
@@ -18,8 +18,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_dxb8v"]
-script = ExtResource("2_2fbk1")
+[sub_resource type="Resource" id="Resource_83opl"]
+script = ExtResource("2_87y6a")
 text = "Non, jamais."
 target_line_id = &"reponse_non"
 required_flags = Array[StringName]([])
@@ -32,8 +32,8 @@ completes_quest_id = &""
 required_keyword_tag = &""
 ends_dialogue = false
 
-[sub_resource type="Resource" id="Resource_uhq7q"]
-script = ExtResource("1_75kub")
+[sub_resource type="Resource" id="Resource_mitjt"]
+script = ExtResource("1_eckeh")
 line_id = &"intro"
 speaker = "Tom"
 text = "Hé, toi ! Est-ce que ça t'arrive d'oublier des choses importantes, comme si elles n'avaient jamais existé ?"
@@ -46,10 +46,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_2fbk1")]([SubResource("Resource_64fc4"), SubResource("Resource_dxb8v")])
+choices = Array[ExtResource("2_87y6a")]([SubResource("Resource_bfbrd"), SubResource("Resource_83opl")])
 
-[sub_resource type="Resource" id="Resource_bmiav"]
-script = ExtResource("1_75kub")
+[sub_resource type="Resource" id="Resource_ox045"]
+script = ExtResource("1_eckeh")
 line_id = &"reponse_oui"
 speaker = "Tom"
 text = "Moi aussi parfois ! Mais mes parents disent que ça revient toujours. C'est vrai, ça, dis ?"
@@ -62,10 +62,10 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_2fbk1")]([])
+choices = Array[ExtResource("2_87y6a")]([])
 
-[sub_resource type="Resource" id="Resource_m7nv0"]
-script = ExtResource("1_75kub")
+[sub_resource type="Resource" id="Resource_7qm0i"]
+script = ExtResource("1_eckeh")
 line_id = &"reponse_non"
 speaker = "Tom"
 text = "Chanceux ! Moi j'ai oublié le nom de mon chat pendant toute une journée une fois. C'était horrible."
@@ -78,12 +78,12 @@ starts_quest_id = &""
 completes_quest_id = &""
 triggers_glitch = false
 auto_next_line_id = &""
-choices = Array[ExtResource("2_2fbk1")]([])
+choices = Array[ExtResource("2_87y6a")]([])
 
 [resource]
-script = ExtResource("3_38yr4")
+script = ExtResource("3_u0v68")
 id = &"tom_intro"
 start_line_id = &"intro"
-lines = Array[ExtResource("1_75kub")]([SubResource("Resource_uhq7q"), SubResource("Resource_bmiav"), SubResource("Resource_m7nv0")])
+lines = Array[ExtResource("1_eckeh")]([SubResource("Resource_mitjt"), SubResource("Resource_ox045"), SubResource("Resource_7qm0i")])
 required_flags = Array[StringName]([])
 forbidden_flags = Array[StringName]([])

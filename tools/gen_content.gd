@@ -18,8 +18,75 @@ func _init() -> void:
 	gen_gaspard()
 	gen_aelia()
 	gen_elena()
+	gen_endings()
 	print("Content generation complete.")
 	quit()
+
+
+func gen_endings() -> void:
+	var fin_veritable := EndingData.new()
+	fin_veritable.id = &"fin_veritable"
+	fin_veritable.title = "Fin véritable — L'Écho s'efface"
+	fin_veritable.description = "L'Anomalie sauve les habitants, sauve la réalité, arrête les boucles, et accepte de disparaître. Personne ne se souvient réellement de qui elle était. Elle regarde une dernière fois le monde qu'elle a sauvé. Elle sourit. Puis disparaît. Le monde continue — et quelque part, sans savoir pourquoi, certains ressentent une impression, une habitude inexplicable, une émotion qu'ils ne comprennent pas."
+	fin_veritable.required_flags = [&"ending/sacrifice_accepted"]
+	fin_veritable.priority = 100
+	fin_veritable.is_true_ending = true
+	ResourceSaver.save(fin_veritable, "res://narrative/Endings/fin_veritable.tres")
+
+	var fin_refus := EndingData.new()
+	fin_refus.id = &"fin_refus"
+	fin_refus.title = "Fin — Le refus"
+	fin_refus.description = "L'Anomalie refuse de disparaître. La boucle ne se brise pas. Quelque part, un fragment de lumière continue de chercher, encore et encore, un monde qui ne finira jamais tout à fait de se souvenir de lui-même."
+	fin_refus.required_flags = [&"ending/sacrifice_refused"]
+	fin_refus.priority = 50
+	fin_refus.is_true_ending = false
+	ResourceSaver.save(fin_refus, "res://narrative/Endings/fin_refus.tres")
+
+	var fin_degradation := EndingData.new()
+	fin_degradation.id = &"fin_degradation"
+	fin_degradation.title = "Fin — Trop tard"
+	fin_degradation.description = "Le monde s'est effondré avant que l'Anomalie n'ait pu comprendre ce qu'elle était censée faire. La boucle recommence, mais quelque chose d'essentiel a déjà été perdu — et cette fois, il ne reste presque rien à sauver."
+	fin_degradation.required_flags = [&"reality/degradation_critical"]
+	fin_degradation.forbidden_flags = [&"ending/sacrifice_accepted", &"ending/sacrifice_refused"]
+	fin_degradation.priority = 75
+	fin_degradation.is_true_ending = false
+	ResourceSaver.save(fin_degradation, "res://narrative/Endings/fin_degradation.tres")
+
+	# The altar at the temple: a placeholder line until the player has at
+	# least met Aelia, then the real final choice.
+	var l_not_ready := DialogueLine.new()
+	l_not_ready.line_id = &"pas_pret"
+	l_not_ready.speaker = ""
+	l_not_ready.text = "(L'autel est froid et silencieux. Il ne se passe rien — pas encore.)"
+
+	var dlg_not_ready := DialogueData.new()
+	dlg_not_ready.id = &"altar_pas_pret"
+	dlg_not_ready.start_line_id = &"pas_pret"
+	dlg_not_ready.lines = [l_not_ready]
+	ResourceSaver.save(dlg_not_ready, "res://narrative/Dialogue/content/dialogue_altar_pas_pret.tres")
+
+	var choice_accepte := DialogueChoice.new()
+	choice_accepte.text = "Accepter — disparaître pour que tout le reste continue."
+	choice_accepte.sets_flags = [&"ending/sacrifice_accepted"]
+	choice_accepte.ends_dialogue = true
+
+	var choice_refuse := DialogueChoice.new()
+	choice_refuse.text = "Refuser. Pas comme ça. Pas encore."
+	choice_refuse.sets_flags = [&"ending/sacrifice_refused"]
+	choice_refuse.ends_dialogue = true
+
+	var l_final := DialogueLine.new()
+	l_final.line_id = &"choix_final"
+	l_final.speaker = ""
+	l_final.text = "(L'autel réagit enfin à ta présence. Tu comprends, sans qu'on te l'explique, ce qu'il attend de toi.)"
+	l_final.choices = [choice_accepte, choice_refuse]
+
+	var dlg_final := DialogueData.new()
+	dlg_final.id = &"altar_choix_final"
+	dlg_final.start_line_id = &"choix_final"
+	dlg_final.lines = [l_final]
+	dlg_final.required_flags = [&"event/aelia_devotion_revealed"]
+	ResourceSaver.save(dlg_final, "res://narrative/Dialogue/content/dialogue_altar_choix_final.tres")
 
 
 func _save_char(char_data: CharacterData) -> void:
