@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://player/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"fragment_de_maelle"
+display_name = "Fragment magique"
+kind = 2
+stackable = false
+persists_across_loops = false
+placeholder_color = Color(0.55, 0.85, 1, 1)
+description = "Un éclat qui réagit étrangement en ta présence. Maëlle le cherchait pour son apprentissage."

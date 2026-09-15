@@ -3,6 +3,7 @@ class_name CharacterData
 ## Data template for a character, kept separate from behavior scripts so content
 ## (Maëlle, Tom, Romain, ...) can be authored as .tres resources instead of code.
 
+@export var id: StringName
 @export var character_name: String
 @export var age: int
 @export var personality: String

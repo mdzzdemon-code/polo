@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://combat/Weapons/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"dague_ecarts"
+display_name = "Dague des Écarts"
+category = 0
+damage = 9.0
+attack_speed = 2.2
+stamina_cost = 12.0
+range = 1.6
+poise_damage = 6.0
+can_be_parried = true
+placeholder_color = Color(0.8, 0.8, 0.85, 1)
+description = "Une lame courte et rapide. L'arme de départ de l'Anomalie."
