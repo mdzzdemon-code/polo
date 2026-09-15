@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
+[ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
+sky_top_color = Color(0.45, 0.6, 0.82, 1)
+sky_horizon_color = Color(0.85, 0.88, 0.9, 1)
+ground_bottom_color = Color(0.4, 0.4, 0.42, 1)
+ground_horizon_color = Color(0.85, 0.88, 0.9, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.85
+fog_enabled = true
+fog_light_color = Color(0.8, 0.83, 0.87, 1)
+fog_density = 0.006
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(60, 60)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.5, 0.5, 0.52, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boulder"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_boulder"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="Material_boulder"]
+albedo_color = Color(0.45, 0.44, 0.46, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_transition"]
+size = Vector3(6, 4, 2)
+
+[node name="MontCieux" type="Node3D"]
+script = ExtResource("1")
+region_id = &"mont_cieux"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+position = Vector3(0, 10, 0)
+rotation_degrees = Vector3(-40, -20, 0)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_ground")
+surface_material_override/0 = SubResource("Material_ground")
+
+[node name="Boulder1" type="StaticBody3D" parent="."]
+position = Vector3(10, 1.5, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boulder1"]
+shape = SubResource("BoxShape3D_boulder")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boulder1"]
+mesh = SubResource("BoxMesh_boulder")
+surface_material_override/0 = SubResource("Material_boulder")
+
+[node name="Boulder2" type="StaticBody3D" parent="."]
+position = Vector3(-11, 1.5, -2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boulder2"]
+shape = SubResource("BoxShape3D_boulder")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boulder2"]
+mesh = SubResource("BoxMesh_boulder")
+surface_material_override/0 = SubResource("Material_boulder")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+position = Vector3(0, 0.1, 0)
+
+[node name="PlayerSpawn_FromRuines" type="Marker3D" parent="."]
+position = Vector3(-10, 0.1, 24)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="PlayerSpawn_FromLac" type="Marker3D" parent="."]
+position = Vector3(10, 0.1, 24)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="PlayerSpawn_FromTemple" type="Marker3D" parent="."]
+position = Vector3(0, 0.1, -22)
+
+[node name="ToRuines" type="Area3D" parent="."]
+position = Vector3(-10, 1, 27)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Cite_Caelum/cite_caelum.tscn"
+target_spawn_point = &"PlayerSpawn_FromMontagne"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToRuines"]
+shape = SubResource("BoxShape3D_transition")
+
+[node name="ToLac" type="Area3D" parent="."]
+position = Vector3(10, 1, 27)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Lac_Lune/lac_lune.tscn"
+target_spawn_point = &"PlayerSpawn_FromMontagne"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToLac"]
+shape = SubResource("BoxShape3D_transition")
+
+[node name="ToTemple" type="Area3D" parent="."]
+position = Vector3(0, 1, -24)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Sanctuaire_Seuil/sanctuaire_seuil.tscn"
+target_spawn_point = &"PlayerSpawn_FromMontagne"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToTemple"]
+shape = SubResource("BoxShape3D_transition")

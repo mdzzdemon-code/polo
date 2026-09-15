@@ -1,0 +1,141 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
+[ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
+sky_top_color = Color(0.3, 0.55, 0.9, 1)
+sky_horizon_color = Color(0.8, 0.88, 0.85, 1)
+ground_bottom_color = Color(0.4, 0.4, 0.25, 1)
+ground_horizon_color = Color(0.8, 0.88, 0.85, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(70, 1, 70)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(70, 70)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.55, 0.62, 0.28, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rock"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rock"]
+radius = 1.0
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="Material_rock"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_transition"]
+size = Vector3(6, 4, 2)
+
+[node name="CampiLucis" type="Node3D"]
+script = ExtResource("1")
+region_id = &"campi_lucis"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+position = Vector3(0, 8, 0)
+rotation_degrees = Vector3(-60, -15, 0)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.5, 0)
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_ground")
+surface_material_override/0 = SubResource("Material_ground")
+
+[node name="Rock1" type="StaticBody3D" parent="."]
+position = Vector3(10, 0.5, 8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock1"]
+shape = SubResource("SphereShape3D_rock")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rock1"]
+mesh = SubResource("SphereMesh_rock")
+surface_material_override/0 = SubResource("Material_rock")
+
+[node name="Rock2" type="StaticBody3D" parent="."]
+position = Vector3(-14, 0.4, -6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock2"]
+shape = SubResource("SphereShape3D_rock")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rock2"]
+mesh = SubResource("SphereMesh_rock")
+surface_material_override/0 = SubResource("Material_rock")
+
+[node name="Rock3" type="StaticBody3D" parent="."]
+position = Vector3(4, 0.4, -18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock3"]
+shape = SubResource("SphereShape3D_rock")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rock3"]
+mesh = SubResource("SphereMesh_rock")
+surface_material_override/0 = SubResource("Material_rock")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+position = Vector3(0, 0.1, 0)
+
+[node name="PlayerSpawn_FromBoiselle" type="Marker3D" parent="."]
+position = Vector3(0, 0.1, 24)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="PlayerSpawn_FromRuines" type="Marker3D" parent="."]
+position = Vector3(28, 0.1, 0)
+rotation_degrees = Vector3(0, -90, 0)
+
+[node name="PlayerSpawn_FromLac" type="Marker3D" parent="."]
+position = Vector3(-28, 0.1, 0)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="ToBoiselle" type="Area3D" parent="."]
+position = Vector3(0, 1, 26)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Boiselle/boiselle.tscn"
+target_spawn_point = &"PlayerSpawn_FromPlaines"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToBoiselle"]
+shape = SubResource("BoxShape3D_transition")
+
+[node name="ToRuines" type="Area3D" parent="."]
+position = Vector3(30, 1, 0)
+rotation_degrees = Vector3(0, 90, 0)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Cite_Caelum/cite_caelum.tscn"
+target_spawn_point = &"PlayerSpawn_FromPlaines"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToRuines"]
+shape = SubResource("BoxShape3D_transition")
+
+[node name="ToLac" type="Area3D" parent="."]
+position = Vector3(-30, 1, 0)
+rotation_degrees = Vector3(0, 90, 0)
+script = ExtResource("2")
+target_scene_path = "res://world/Solenne/Lac_Lune/lac_lune.tscn"
+target_spawn_point = &"PlayerSpawn_FromPlaines"
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToLac"]
+shape = SubResource("BoxShape3D_transition")
