@@ -1,6 +1,6 @@
 extends Interactable
 class_name NPCInteractable
-## Sits as a child Area3D on an NPC so the player's generic Interaction
+## Sits as a child Area2D on an NPC so the player's generic Interaction
 ## component can find it in the "interactable" group and start dialogue.
 
 @export var npc_path: NodePath = ".."

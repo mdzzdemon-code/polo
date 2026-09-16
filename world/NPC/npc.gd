@@ -1,7 +1,7 @@
-extends CharacterBody3D
+extends CharacterBody2D
 class_name NPC
 ## Generic PNJ driven by a CharacterData resource: schedule-based movement
-## between in-scene Marker3D waypoints, a default dialogue plus flag-gated
+## between in-scene Marker2D waypoints, a default dialogue plus flag-gated
 ## variants, and a receive_hit() so it participates in friendly fire and can
 ## genuinely die (see CharacterData.can_die — no plot armor).
 
@@ -10,13 +10,12 @@ signal died
 @export var character_data: CharacterData
 @export var dialogue: DialogueData
 @export var dialogue_variants: Array[DialogueData] = [] # checked in order, first match wins
-@export var schedule_markers: Array[NodePath] = [] # Marker3D siblings in this region
+@export var schedule_markers: Array[NodePath] = [] # Marker2D siblings in this region
 @export var schedule_hours: Array[int] = [] # start hour for each marker, same length
-@export var move_speed: float = 2.5
-@export var gravity: float = 18.0
+@export var move_speed: float = 100.0
 @export var dies_on_flag: StringName # optional — a narrative consequence can kill this PNJ directly
 
-@onready var body_mesh: Node3D = $BodyMesh
+@onready var body_visual: Node2D = $BodyVisual
 var health: float
 var is_dead: bool = false
 
@@ -24,10 +23,8 @@ var is_dead: bool = false
 func _ready() -> void:
 	health = character_data.max_health if character_data else 30.0
 	if character_data:
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = character_data.placeholder_color
-		var mesh_instance: MeshInstance3D = body_mesh.get_node("MeshInstance3D")
-		mesh_instance.set_surface_override_material(0, mat)
+		var body_rect: ColorRect = body_visual.get_node("Body")
+		body_rect.color = character_data.placeholder_color
 	if dies_on_flag != &"":
 		if EventManager.has_flag(dies_on_flag):
 			die()
@@ -44,31 +41,18 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 	var target := _current_schedule_target()
-	var vel := velocity
+	var vel := Vector2.ZERO
 	if target:
-		var to_target: Vector3 = target.global_position - global_position
-		to_target.y = 0.0
-		if to_target.length() > 0.3:
+		var to_target: Vector2 = target.global_position - global_position
+		if to_target.length() > 4.0:
 			var dir := to_target.normalized()
-			vel.x = dir.x * move_speed
-			vel.z = dir.z * move_speed
-			body_mesh.rotation.y = lerp_angle(body_mesh.rotation.y, atan2(dir.x, dir.z), 6.0 * delta)
-		else:
-			vel.x = 0.0
-			vel.z = 0.0
-	else:
-		vel.x = 0.0
-		vel.z = 0.0
-
-	if is_on_floor():
-		vel.y = -0.5
-	else:
-		vel.y -= gravity * delta
+			vel = dir * move_speed
+			body_visual.rotation = lerp_angle(body_visual.rotation, dir.angle(), 6.0 * delta)
 	velocity = vel
 	move_and_slide()
 
 
-func _current_schedule_target() -> Node3D:
+func _current_schedule_target() -> Node2D:
 	if schedule_markers.is_empty():
 		return null
 	var hour := TimeManager.hour()
@@ -114,5 +98,5 @@ func die() -> void:
 	hide()
 	set_physics_process(false)
 	for child in get_children():
-		if child is CollisionShape3D:
+		if child is CollisionShape2D:
 			child.set_deferred("disabled", true)

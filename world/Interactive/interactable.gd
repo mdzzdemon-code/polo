@@ -1,4 +1,4 @@
-extends Area3D
+extends Area2D
 class_name Interactable
 ## Base class for anything the player can press E on. Extend and override interact().
 

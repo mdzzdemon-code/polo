@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="Script" path="res://world/Interactive/scene_transition.gd" id="2"]
@@ -10,168 +10,124 @@
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_altar_choix_final.tres" id="8"]
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_aelia_suite.tres" id="9"]
 
-[sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
-sky_top_color = Color(0.28, 0.2, 0.4, 1)
-sky_horizon_color = Color(0.5, 0.42, 0.55, 1)
-ground_bottom_color = Color(0.18, 0.15, 0.2, 1)
-ground_horizon_color = Color(0.5, 0.42, 0.55, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pillar"]
+radius = 28.0
 
-[sub_resource type="Sky" id="Sky_1"]
-sky_material = SubResource("SkyMat_1")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_altar"]
+size = Vector2(100, 60)
 
-[sub_resource type="Environment" id="Environment_1"]
-background_mode = 2
-sky = SubResource("Sky_1")
-ambient_light_source = 3
-ambient_light_sky_contribution = 0.6
-ambient_light_color = Color(0.5, 0.45, 0.6, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_altar_interact"]
+radius = 80.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
-size = Vector3(40, 1, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_transition"]
+size = Vector2(240, 80)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
-size = Vector2(40, 40)
-
-[sub_resource type="StandardMaterial3D" id="Material_ground"]
-albedo_color = Color(0.4, 0.38, 0.45, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_pillar"]
-radius = 0.7
-height = 8.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_pillar"]
-top_radius = 0.7
-bottom_radius = 0.8
-height = 8.0
-
-[sub_resource type="StandardMaterial3D" id="Material_pillar"]
-albedo_color = Color(0.7, 0.68, 0.75, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_altar"]
-size = Vector3(2.5, 1.2, 1.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_altar"]
-size = Vector3(2.5, 1.2, 1.5)
-
-[sub_resource type="StandardMaterial3D" id="Material_altar"]
-albedo_color = Color(0.85, 0.8, 0.6, 1)
-emission_enabled = true
-emission = Color(0.6, 0.55, 0.9, 1)
-emission_energy_multiplier = 0.6
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_transition"]
-size = Vector3(6, 4, 2)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_altar"]
-radius = 2.0
-
-[node name="SanctuaireSeuil" type="Node3D"]
+[node name="SanctuaireSeuil" type="Node2D"]
 script = ExtResource("1")
 region_id = &"sanctuaire_seuil"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1")
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.85, 0.8, 0.92, 1)
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-position = Vector3(0, 10, 0)
-rotation_degrees = Vector3(-35, -30, 0)
-light_energy = 0.7
-light_color = Color(0.75, 0.7, 0.9, 1)
-shadow_enabled = true
+[node name="Ground" type="ColorRect" parent="."]
+offset_left = -800.0
+offset_top = -800.0
+offset_right = 800.0
+offset_bottom = 800.0
+color = Color(0.4, 0.38, 0.45, 1)
+z_index = -10
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Pillar1" type="StaticBody2D" parent="."]
+position = Vector2(240, 240)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-position = Vector3(0, -0.5, 0)
-shape = SubResource("BoxShape3D_ground")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar1"]
+shape = SubResource("CircleShape2D_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("PlaneMesh_ground")
-surface_material_override/0 = SubResource("Material_ground")
+[node name="Visual" type="Polygon2D" parent="Pillar1"]
+scale = Vector2(28, 28)
+color = Color(0.7, 0.68, 0.75, 1)
+polygon = PackedVector2Array(1, 0, 0.866, 0.5, 0.5, 0.866, 0, 1, -0.5, 0.866, -0.866, 0.5, -1, 0, -0.866, -0.5, -0.5, -0.866, 0, -1, 0.5, -0.866, 0.866, -0.5)
 
-[node name="Pillar1" type="StaticBody3D" parent="."]
-position = Vector3(6, 4, 6)
+[node name="Pillar2" type="StaticBody2D" parent="."]
+position = Vector2(-240, 240)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar1"]
-shape = SubResource("CylinderShape3D_pillar")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar2"]
+shape = SubResource("CircleShape2D_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar1"]
-mesh = SubResource("CylinderMesh_pillar")
-surface_material_override/0 = SubResource("Material_pillar")
+[node name="Visual" type="Polygon2D" parent="Pillar2"]
+scale = Vector2(28, 28)
+color = Color(0.7, 0.68, 0.75, 1)
+polygon = PackedVector2Array(1, 0, 0.866, 0.5, 0.5, 0.866, 0, 1, -0.5, 0.866, -0.866, 0.5, -1, 0, -0.866, -0.5, -0.5, -0.866, 0, -1, 0.5, -0.866, 0.866, -0.5)
 
-[node name="Pillar2" type="StaticBody3D" parent="."]
-position = Vector3(-6, 4, 6)
+[node name="Pillar3" type="StaticBody2D" parent="."]
+position = Vector2(240, -240)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar2"]
-shape = SubResource("CylinderShape3D_pillar")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar3"]
+shape = SubResource("CircleShape2D_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar2"]
-mesh = SubResource("CylinderMesh_pillar")
-surface_material_override/0 = SubResource("Material_pillar")
+[node name="Visual" type="Polygon2D" parent="Pillar3"]
+scale = Vector2(28, 28)
+color = Color(0.7, 0.68, 0.75, 1)
+polygon = PackedVector2Array(1, 0, 0.866, 0.5, 0.5, 0.866, 0, 1, -0.5, 0.866, -0.866, 0.5, -1, 0, -0.866, -0.5, -0.5, -0.866, 0, -1, 0.5, -0.866, 0.866, -0.5)
 
-[node name="Pillar3" type="StaticBody3D" parent="."]
-position = Vector3(6, 4, -6)
+[node name="Pillar4" type="StaticBody2D" parent="."]
+position = Vector2(-240, -240)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar3"]
-shape = SubResource("CylinderShape3D_pillar")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pillar4"]
+shape = SubResource("CircleShape2D_pillar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar3"]
-mesh = SubResource("CylinderMesh_pillar")
-surface_material_override/0 = SubResource("Material_pillar")
+[node name="Visual" type="Polygon2D" parent="Pillar4"]
+scale = Vector2(28, 28)
+color = Color(0.7, 0.68, 0.75, 1)
+polygon = PackedVector2Array(1, 0, 0.866, 0.5, 0.5, 0.866, 0, 1, -0.5, 0.866, -0.866, 0.5, -1, 0, -0.866, -0.5, -0.5, -0.866, 0, -1, 0.5, -0.866, 0.866, -0.5)
 
-[node name="Pillar4" type="StaticBody3D" parent="."]
-position = Vector3(-6, 4, -6)
+[node name="Altar" type="StaticBody2D" parent="."]
+position = Vector2(0, -480)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar4"]
-shape = SubResource("CylinderShape3D_pillar")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Altar"]
+shape = SubResource("RectangleShape2D_altar")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar4"]
-mesh = SubResource("CylinderMesh_pillar")
-surface_material_override/0 = SubResource("Material_pillar")
+[node name="Visual" type="ColorRect" parent="Altar"]
+offset_left = -50.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 30.0
+color = Color(0.85, 0.8, 0.6, 1)
 
-[node name="Altar" type="StaticBody3D" parent="."]
-position = Vector3(0, 0.6, -12)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Altar"]
-shape = SubResource("BoxShape3D_altar")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Altar"]
-mesh = SubResource("BoxMesh_altar")
-surface_material_override/0 = SubResource("Material_altar")
-
-[node name="AltarInteraction" type="Area3D" parent="Altar"]
+[node name="AltarInteraction" type="Area2D" parent="Altar"]
 script = ExtResource("6")
 dialogue = ExtResource("7")
 dialogue_variants = [ExtResource("8")]
 prompt_text = "Toucher l'autel"
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Altar/AltarInteraction"]
-shape = SubResource("SphereShape3D_altar")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Altar/AltarInteraction"]
+shape = SubResource("CircleShape2D_altar_interact")
 
-[node name="PlayerSpawn" type="Marker3D" parent="."]
-position = Vector3(0, 0.1, 14)
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 560)
 
-[node name="PlayerSpawn_FromMontagne" type="Marker3D" parent="."]
-position = Vector3(0, 0.1, 16)
-rotation_degrees = Vector3(0, 180, 0)
+[node name="PlayerSpawn_FromMontagne" type="Marker2D" parent="."]
+position = Vector2(0, 640)
+rotation_degrees = -90.0
 
-[node name="AelieSpot" type="Marker3D" parent="."]
-position = Vector3(0, 0.1, -9)
-rotation_degrees = Vector3(0, 180, 0)
+[node name="AelieSpot" type="Marker2D" parent="."]
+position = Vector2(0, -360)
+rotation_degrees = 90.0
 
 [node name="Aelia" parent="." instance=ExtResource("3")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, -9)
+position = Vector2(0, -360)
+rotation = 1.5708
 character_data = ExtResource("4")
 dialogue = ExtResource("5")
 dialogue_variants = [ExtResource("9")]
 
-[node name="ToMontagne" type="Area3D" parent="."]
-position = Vector3(0, 1, 18)
+[node name="ToMontagne" type="Area2D" parent="."]
+position = Vector2(0, 720)
 script = ExtResource("2")
 target_scene_path = "res://world/Solenne/Mont_Cieux/mont_cieux.tscn"
 target_spawn_point = &"PlayerSpawn_FromTemple"
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToMontagne"]
-shape = SubResource("BoxShape3D_transition")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToMontagne"]
+shape = SubResource("RectangleShape2D_transition")

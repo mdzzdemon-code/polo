@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 class_name Region
 ## Attached to the root of every region scene (Foret_Aube, Boiselle, ...).
 ## Also the hook point for world degradation: the world starts beautiful and
@@ -9,7 +9,9 @@ class_name Region
 @export var ambient_music_path: String = ""
 @export var ambience_sfx_path: String = ""
 
-@onready var _world_environment: WorldEnvironment = get_node_or_null("WorldEnvironment")
+@onready var _canvas_modulate: CanvasModulate = get_node_or_null("CanvasModulate")
+
+const DEGRADED_TINT := Color(0.55, 0.55, 0.6)
 
 
 func _ready() -> void:
@@ -21,13 +23,7 @@ func _ready() -> void:
 
 
 func _apply_degradation(level: int) -> void:
-	if _world_environment == null or _world_environment.environment == null:
+	if _canvas_modulate == null:
 		return
-	var env := _world_environment.environment
-	env.adjustment_enabled = true
-	env.adjustment_saturation = clamp(1.0 - level * 0.12, 0.3, 1.0)
-	env.adjustment_brightness = clamp(1.0 - level * 0.04, 0.75, 1.0)
-	env.fog_enabled = level > 0
-	if level > 0:
-		env.fog_light_color = Color(0.5, 0.5, 0.55)
-		env.fog_density = min(0.008 * level, 0.05)
+	var t: float = clamp(float(level) / 5.0, 0.0, 1.0)
+	_canvas_modulate.color = Color.WHITE.lerp(DEGRADED_TINT, t)

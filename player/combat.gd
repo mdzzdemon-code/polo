@@ -1,7 +1,8 @@
 extends Node
-## Real-time 3rd person combat: attack / dodge (i-frames) / parry (only effective
-## against weapons flagged can_be_parried) / optional lock-on. Attacks are a simple
-## range+cone check against the "damageable" group, which enables friendly fire.
+## Real-time top-down combat: attack / dodge (i-frames) / parry (only effective
+## against weapons flagged can_be_parried) / optional lock-on. Attacks are a
+## simple range+cone check against the "damageable" group (friendly fire).
+## While locked on, this component owns BodyVisual's facing instead of Movement.
 
 signal attacked(weapon: WeaponData)
 signal dodged
@@ -11,18 +12,17 @@ signal lock_on_changed(target: Node)
 
 @export var equipped_weapon: WeaponData
 @export var dodge_duration: float = 0.4
-@export var dodge_speed: float = 10.0
+@export var dodge_speed: float = 400.0
 @export var dodge_iframe_time: float = 0.25
 @export var parry_window: float = 0.3
 @export var max_stamina: float = 100.0
 @export var stamina_regen: float = 20.0
 @export var attack_cone_dot: float = 0.3
-@export var lock_on_range: float = 15.0
+@export var lock_on_range: float = 600.0
 
-@onready var player: CharacterBody3D = get_parent()
+@onready var player: Player = get_parent()
 @onready var stability: StabilityComponent = player.get_node("Stability")
-@onready var body_mesh: Node3D = player.get_node("BodyMesh")
-@onready var camera_rig: Node3D = player.get_node("CameraRig")
+@onready var body_visual: Node2D = player.get_node("BodyVisual")
 
 var stamina: float
 var state: String = "idle" # idle | attacking | dodging | parrying
@@ -92,18 +92,16 @@ func _try_attack() -> void:
 
 
 func _resolve_attack_hits() -> void:
-	var yaw: float = body_mesh.rotation.y
-	var facing := Vector3(sin(yaw), 0.0, cos(yaw))
+	var facing := Vector2.RIGHT.rotated(body_visual.rotation)
 	var weapon := equipped_weapon
 	var keywords: Node = player.get_node("Keywords")
 	for target in get_tree().get_nodes_in_group("damageable"):
 		if target == player or not is_instance_valid(target):
 			continue
-		var to_target: Vector3 = target.global_position - player.global_position
-		if to_target.length() > weapon.range + 1.0:
+		var to_target: Vector2 = target.global_position - player.global_position
+		if to_target.length() > weapon.range:
 			continue
-		var flat := Vector3(to_target.x, 0.0, to_target.z).normalized()
-		if flat.dot(facing) < attack_cone_dot:
+		if to_target.normalized().dot(facing) < attack_cone_dot:
 			continue
 		var mult := 1.0
 		if keywords and target.has_method("get_weakness_tags"):
@@ -118,11 +116,9 @@ func _try_dodge() -> void:
 	is_invulnerable = true
 	dodged.emit()
 	AudioManager.play_sfx("dodge")
-	var dir: Vector3 = player.velocity
-	dir.y = 0.0
+	var dir: Vector2 = player.velocity
 	if dir.length() < 0.1:
-		var yaw: float = body_mesh.rotation.y
-		dir = -Vector3(sin(yaw), 0.0, cos(yaw))
+		dir = -Vector2.RIGHT.rotated(body_visual.rotation)
 	dir = dir.normalized()
 	player.velocity = dir * dodge_speed
 	get_tree().create_timer(dodge_iframe_time).timeout.connect(func(): is_invulnerable = false)
@@ -162,12 +158,10 @@ func _toggle_lock_on() -> void:
 
 
 func _face_lock_on_target(delta: float) -> void:
-	var to_target: Vector3 = lock_on_target.global_position - camera_rig.global_position
-	to_target.y = 0.0
+	var to_target: Vector2 = lock_on_target.global_position - player.global_position
 	if to_target.length() < 0.01:
 		return
-	var target_yaw := atan2(to_target.x, to_target.z)
-	camera_rig.rotation.y = lerp_angle(camera_rig.rotation.y, target_yaw, 8.0 * delta)
+	body_visual.rotation = lerp_angle(body_visual.rotation, to_target.angle(), 8.0 * delta)
 
 
 ## Common damageable interface, called by whatever hits the player.

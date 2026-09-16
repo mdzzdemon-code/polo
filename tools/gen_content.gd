@@ -772,7 +772,7 @@ func gen_combat_content() -> void:
 	heavy.damage = 22.0
 	heavy.attack_speed = 0.7
 	heavy.stamina_cost = 28.0
-	heavy.range = 2.6
+	heavy.range = 104.0
 	heavy.poise_damage = 18.0
 	heavy.can_be_parried = true
 	heavy.placeholder_color = Color(0.5, 0.5, 0.55, 1.0)
@@ -786,7 +786,7 @@ func gen_combat_content() -> void:
 	ranged.damage = 14.0
 	ranged.attack_speed = 1.1
 	ranged.stamina_cost = 16.0
-	ranged.range = 9.0
+	ranged.range = 360.0
 	ranged.poise_damage = 8.0
 	ranged.can_be_parried = false
 	ranged.placeholder_color = Color(0.6, 0.45, 0.25, 1.0)
@@ -799,10 +799,10 @@ func gen_combat_content() -> void:
 	peur_muette.symbolism = "Une silhouette qui recule sans cesse mais qui frappe dès qu'on s'approche trop vite — la peur qu'on tente de fuir finit par se retourner contre soi."
 	peur_muette.max_health = 55.0
 	peur_muette.max_stability = 40.0
-	peur_muette.move_speed = 3.2
+	peur_muette.move_speed = 128.0
 	peur_muette.attack_damage = 9.0
-	peur_muette.attack_range = 2.2
-	peur_muette.detection_range = 9.0
+	peur_muette.attack_range = 88.0
+	peur_muette.detection_range = 360.0
 	peur_muette.behavior = TraumaData.Behavior.SKITTISH
 	peur_muette.weaknesses = [&"peur"]
 	peur_muette.placeholder_color = Color(0.55, 0.2, 0.35, 1.0)
@@ -814,10 +814,10 @@ func gen_combat_content() -> void:
 	poids_silence.symbolism = "Une masse immobile qui ne bouge pas tant qu'on ne l'approche pas — jusqu'à ce qu'il soit trop tard pour reculer."
 	poids_silence.max_health = 80.0
 	poids_silence.max_stability = 60.0
-	poids_silence.move_speed = 2.2
+	poids_silence.move_speed = 88.0
 	poids_silence.attack_damage = 14.0
-	poids_silence.attack_range = 2.4
-	poids_silence.detection_range = 12.0
+	poids_silence.attack_range = 96.0
+	poids_silence.detection_range = 480.0
 	poids_silence.behavior = TraumaData.Behavior.SENTINEL
 	poids_silence.weaknesses = []
 	poids_silence.placeholder_color = Color(0.25, 0.25, 0.3, 1.0)

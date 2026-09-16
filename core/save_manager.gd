@@ -12,6 +12,7 @@ func save_game() -> void:
 		"loop_number": LoopManager.loop_number,
 		"degradation_level": RealityManager.degradation_level,
 		"flags": _flags_to_json(EventManager.get_all_flags()),
+		"possessed_memories": _to_str_array(MemoryManager.possessed_memories),
 		"lost_memories": _to_str_array(MemoryManager.lost_memories),
 		"revealed_memories": _to_str_array(MemoryManager.revealed_memories),
 		"discovered_quests": _to_str_array(QuestManager.discovered_quests),
@@ -44,6 +45,8 @@ func load_game() -> bool:
 	LoopManager.loop_number = data.get("loop_number", 1)
 	RealityManager.degradation_level = data.get("degradation_level", 0)
 	EventManager.load_flags(data.get("flags", {}))
+	if data.has("possessed_memories"):
+		MemoryManager.possessed_memories = _to_sn_array(data.get("possessed_memories", []))
 	MemoryManager.lost_memories = _to_sn_array(data.get("lost_memories", []))
 	MemoryManager.revealed_memories = _to_sn_array(data.get("revealed_memories", []))
 	QuestManager.discovered_quests = _to_sn_array(data.get("discovered_quests", []))
@@ -75,8 +78,8 @@ func _serialize_player(player: Player) -> Dictionary:
 	return {
 		"health": player.health,
 		"max_health": player.max_health,
-		"position": [pos.x, pos.y, pos.z],
-		"rotation_y": player.rotation.y,
+		"position": [pos.x, pos.y],
+		"facing_rotation": player.get_node("BodyVisual").rotation,
 		"known_keywords": known,
 		"equipped_keywords": equipped,
 		"inventory": inventory,
@@ -89,10 +92,10 @@ func _deserialize_player(player: Player, pdata: Dictionary) -> void:
 	player.health = pdata.get("health", player.health)
 	player.health_changed.emit(player.health, player.max_health)
 
-	var pos: Array = pdata.get("position", [0.0, 0.0, 0.0])
-	if pos.size() == 3:
-		player.global_position = Vector3(pos[0], pos[1], pos[2])
-	player.rotation.y = pdata.get("rotation_y", 0.0)
+	var pos: Array = pdata.get("position", [0.0, 0.0])
+	if pos.size() == 2:
+		player.global_position = Vector2(pos[0], pos[1])
+	player.get_node("BodyVisual").rotation = pdata.get("facing_rotation", 0.0)
 
 	for kw_id in pdata.get("known_keywords", []):
 		var kw := ContentRegistry.get_keyword(StringName(kw_id))

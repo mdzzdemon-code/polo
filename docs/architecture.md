@@ -1,7 +1,18 @@
 # Architecture technique
 
-Moteur : **Godot 4 (3D, Forward+)**, cible PC/Windows, ~60 FPS, style non
-photoréaliste mais lisible.
+Moteur : **Godot 4, vue du dessus en 2D** (façon Pokémon/Zelda), cible
+PC/Windows, ~60 FPS, style non photoréaliste mais lisible.
+
+Le projet a démarré en 3D (troisième personne) puis a été converti en 2D
+vue du dessus à la demande du joueur, en conservant le combat temps réel
+(esquive/parade/lock-on/Synapse-Lien) plutôt que de basculer vers un combat
+au tour par tour façon Pokémon. Tous les systèmes de jeu (dialogue, quêtes,
+mémoire, boucles, sauvegarde...) sont indépendants du rendu et n'ont pas eu
+besoin d'être réécrits — seule la couche "monde" (joueur, caméra, PNJ,
+Traumatismes, régions, triggers) a été convertie de `Node3D`/`CharacterBody3D`
+vers `Node2D`/`CharacterBody2D`. Convention d'échelle : 1 "mètre" de l'ancienne
+version 3D ≈ 40 pixels (les vitesses, portées d'armes et de détection ont été
+recalculées sur cette base — voir `docs/balance.md`).
 
 ## Arborescence
 
@@ -86,10 +97,14 @@ combat, etc.).
       gabarit de données `CharacterData`.
 - [x] Étapes 3 à 25 — voir `docs/GDD.md` § Feuille de route. Prototype complet :
       tous les systèmes du GDD sont implémentés en GDScript fonctionnel, avec
-      géométrie primitive à la place des modèles 3D, quelques SFX/musique
-      procéduraux minimalistes (pas de composition audio réelle), et un
-      contenu narratif représentatif plutôt qu'exhaustif (chaque personnage a
-      au moins un dialogue, pas encore une écriture complète de bout en bout).
+      géométrie primitive à la place des modèles/sprites définitifs, quelques
+      SFX/musique procéduraux minimalistes (pas de composition audio réelle),
+      et un contenu narratif représentatif plutôt qu'exhaustif (chaque
+      personnage a au moins un dialogue, pas encore une écriture complète de
+      bout en bout).
+- [x] Conversion 2D — vue du dessus façon Pokémon, combat temps réel conservé.
+      Formes primitives en aplat de couleur vues du dessus (cercles/rectangles
+      `Polygon2D`/`ColorRect`) à la place des sprites définitifs.
 
 ## Build
 

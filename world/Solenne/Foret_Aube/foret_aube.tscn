@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://world/Environment/region.gd" id="1"]
 [ext_resource type="PackedScene" path="res://world/Environment/tree_placeholder.tscn" id="2"]
@@ -9,145 +9,109 @@
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_maelle_premiere_rencontre.tres" id="7"]
 [ext_resource type="Resource" path="res://narrative/Dialogue/content/dialogue_maelle_suite.tres" id="8"]
 
-[sub_resource type="ProceduralSkyMaterial" id="SkyMat_1"]
-sky_top_color = Color(0.35, 0.55, 0.85, 1)
-sky_horizon_color = Color(0.75, 0.85, 0.9, 1)
-ground_bottom_color = Color(0.3, 0.25, 0.2, 1)
-ground_horizon_color = Color(0.75, 0.85, 0.9, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_glitch"]
+radius = 80.0
 
-[sub_resource type="Sky" id="Sky_1"]
-sky_material = SubResource("SkyMat_1")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_transition"]
+size = Vector2(240, 80)
 
-[sub_resource type="Environment" id="Environment_1"]
-background_mode = 2
-sky = SubResource("Sky_1")
-ambient_light_source = 3
-ambient_light_sky_contribution = 0.7
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
-size = Vector3(60, 1, 60)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
-size = Vector2(60, 60)
-
-[sub_resource type="StandardMaterial3D" id="Material_ground"]
-albedo_color = Color(0.27, 0.45, 0.2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_stream"]
-size = Vector3(2.5, 0.05, 22)
-
-[sub_resource type="StandardMaterial3D" id="Material_stream"]
-albedo_color = Color(0.25, 0.55, 0.75, 0.75)
-transparency = 1
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_glitch"]
-radius = 2.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_transition"]
-size = Vector3(6, 4, 2)
-
-[node name="ForetAube" type="Node3D"]
+[node name="ForetAube" type="Node2D"]
 script = ExtResource("1")
 region_id = &"foret_aube"
 ambient_music_path = "res://audio/Music/ambient_placeholder.wav"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1")
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 1)
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
-position = Vector3(0, 8, 0)
-rotation_degrees = Vector3(-50, -25, 0)
-light_energy = 1.2
-shadow_enabled = true
+[node name="Ground" type="ColorRect" parent="."]
+offset_left = -1200.0
+offset_top = -1200.0
+offset_right = 1200.0
+offset_bottom = 1200.0
+color = Color(0.27, 0.45, 0.2, 1)
+z_index = -10
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Stream" type="ColorRect" parent="."]
+position = Vector2(-560, 0)
+rotation_degrees = 12.0
+offset_left = -50.0
+offset_top = -440.0
+offset_right = 50.0
+offset_bottom = 440.0
+color = Color(0.25, 0.55, 0.75, 0.75)
+z_index = -5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-position = Vector3(0, -0.5, 0)
-shape = SubResource("BoxShape3D_ground")
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 560)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("PlaneMesh_ground")
-surface_material_override/0 = SubResource("Material_ground")
-
-[node name="Stream" type="MeshInstance3D" parent="."]
-position = Vector3(-14, 0.05, 0)
-rotation_degrees = Vector3(0, 12, 0)
-mesh = SubResource("BoxMesh_stream")
-surface_material_override/0 = SubResource("Material_stream")
-
-[node name="PlayerSpawn" type="Marker3D" parent="."]
-position = Vector3(0, 0.1, 14)
-
-[node name="PlayerSpawn_FromBoiselle" type="Marker3D" parent="."]
-position = Vector3(0, 0.1, -20)
-rotation_degrees = Vector3(0, 180, 0)
+[node name="PlayerSpawn_FromBoiselle" type="Marker2D" parent="."]
+position = Vector2(0, -800)
+rotation_degrees = 90.0
 
 [node name="Tree1" parent="." instance=ExtResource("2")]
-position = Vector3(6, 0, 8)
+position = Vector2(240, 320)
 
 [node name="Tree2" parent="." instance=ExtResource("2")]
-position = Vector3(-6, 0, 6)
+position = Vector2(-240, 240)
 
 [node name="Tree3" parent="." instance=ExtResource("2")]
-position = Vector3(10, 0, -2)
+position = Vector2(400, -80)
 
 [node name="Tree4" parent="." instance=ExtResource("2")]
-position = Vector3(-10, 0, -4)
+position = Vector2(-400, -160)
 
 [node name="Tree5" parent="." instance=ExtResource("2")]
-position = Vector3(4, 0, -12)
+position = Vector2(160, -480)
 
 [node name="Tree6" parent="." instance=ExtResource("2")]
-position = Vector3(-4, 0, -16)
+position = Vector2(-160, -640)
 
 [node name="Tree7" parent="." instance=ExtResource("2")]
-position = Vector3(14, 0, 4)
+position = Vector2(560, 160)
 
 [node name="Tree8" parent="." instance=ExtResource("2")]
-position = Vector3(-16, 0, 10)
+position = Vector2(-640, 400)
 
 [node name="Tree9" parent="." instance=ExtResource("2")]
-position = Vector3(18, 0, -10)
+position = Vector2(720, -400)
 
 [node name="Tree10" parent="." instance=ExtResource("2")]
-position = Vector3(-8, 0, 18)
+position = Vector2(-320, 720)
 
 [node name="Tree11" parent="." instance=ExtResource("2")]
-position = Vector3(2, 0, 20)
+position = Vector2(80, 800)
 
 [node name="Tree12" parent="." instance=ExtResource("2")]
-position = Vector3(-20, 0, -6)
+position = Vector2(-800, -240)
 
-[node name="MaelleSpotDay" type="Marker3D" parent="."]
-position = Vector3(3, 0.1, 4)
+[node name="MaelleSpotDay" type="Marker2D" parent="."]
+position = Vector2(120, 160)
 
-[node name="MaelleSpotEvening" type="Marker3D" parent="."]
-position = Vector3(-3, 0.1, 12)
+[node name="MaelleSpotEvening" type="Marker2D" parent="."]
+position = Vector2(-120, 480)
 
 [node name="Maelle" parent="." instance=ExtResource("5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+position = Vector2(120, 160)
 character_data = ExtResource("6")
 dialogue = ExtResource("7")
 dialogue_variants = [ExtResource("8")]
 schedule_markers = [NodePath("../MaelleSpotDay"), NodePath("../MaelleSpotEvening")]
 schedule_hours = [6, 19]
 
-[node name="FirstGlitch" type="Area3D" parent="."]
-position = Vector3(0, 1, 0)
+[node name="FirstGlitch" type="Area2D" parent="."]
 script = ExtResource("3")
 glitch_id = &"foret_premier_glitch"
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FirstGlitch"]
-shape = SubResource("SphereShape3D_glitch")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirstGlitch"]
+shape = SubResource("CircleShape2D_glitch")
 
-[node name="ToBoiselle" type="Area3D" parent="."]
-position = Vector3(0, 1, -22)
+[node name="ToBoiselle" type="Area2D" parent="."]
+position = Vector2(0, -880)
 script = ExtResource("4")
 target_scene_path = "res://world/Solenne/Boiselle/boiselle.tscn"
 target_spawn_point = &"PlayerSpawn_FromForet"
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToBoiselle"]
-shape = SubResource("BoxShape3D_transition")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToBoiselle"]
+shape = SubResource("RectangleShape2D_transition")

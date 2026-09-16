@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends CharacterBody2D
 class_name Trauma
 ## Physical manifestation of a psychological wound, driven by a TraumaData
 ## resource. Simple patrol/chase/attack/staggered state machine. When
@@ -11,15 +11,14 @@ signal died
 @export var trauma_data: TraumaData
 @export var home_path: NodePath # optional patrol anchor; defaults to spawn position
 
-@onready var body_mesh: Node3D = $BodyMesh
+@onready var body_visual: Node2D = $BodyVisual
 @onready var stability: StabilityComponent = $Stability
 
 var health: float
 var state: String = "patrol" # patrol | chase | attack | staggered
-var _home: Vector3
+var _home: Vector2
 var _attack_cooldown: float = 0.0
 var _stagger_timer: float = 0.0
-var gravity: float = 18.0
 
 
 func _ready() -> void:
@@ -31,9 +30,8 @@ func _ready() -> void:
 	stability.broken.connect(_on_stability_broken)
 	_home = get_node(home_path).global_position if home_path != NodePath() else global_position
 	if trauma_data:
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = trauma_data.placeholder_color
-		body_mesh.get_node("MeshInstance3D").set_surface_override_material(0, mat)
+		var body_rect: ColorRect = body_visual.get_node("Body")
+		body_rect.color = trauma_data.placeholder_color
 
 
 func get_trauma_id() -> StringName:
@@ -53,12 +51,11 @@ func _physics_process(delta: float) -> void:
 		if _stagger_timer <= 0.0:
 			state = "patrol"
 			stability.recover_from_break()
-		_apply_gravity(delta)
 		move_and_slide()
 		return
 
 	var player: Player = GameManager.player
-	var vel := velocity
+	var vel := Vector2.ZERO
 	if player and is_instance_valid(player):
 		var dist := global_position.distance_to(player.global_position)
 		# SENTINEL traumas barely react until the player is right on top of them;
@@ -74,53 +71,28 @@ func _physics_process(delta: float) -> void:
 			state = "patrol"
 
 		if state == "chase":
-			var dir := (player.global_position - global_position)
-			dir.y = 0.0
-			dir = dir.normalized()
-			vel.x = dir.x * trauma_data.move_speed
-			vel.z = dir.z * trauma_data.move_speed
-			body_mesh.rotation.y = lerp_angle(body_mesh.rotation.y, atan2(dir.x, dir.z), 6.0 * delta)
+			var dir := (player.global_position - global_position).normalized()
+			vel = dir * trauma_data.move_speed
+			body_visual.rotation = lerp_angle(body_visual.rotation, dir.angle(), 6.0 * delta)
 		elif state == "attack":
-			vel.x = 0.0
-			vel.z = 0.0
 			var dir := (player.global_position - global_position)
-			dir.y = 0.0
 			if dir.length() > 0.01:
-				body_mesh.rotation.y = lerp_angle(body_mesh.rotation.y, atan2(dir.x, dir.z), 6.0 * delta)
+				body_visual.rotation = lerp_angle(body_visual.rotation, dir.angle(), 6.0 * delta)
 			if _attack_cooldown <= 0.0:
 				_perform_attack(player)
 				_attack_cooldown = 1.6
 		else:
-			_patrol(delta, vel)
-	else:
-		vel.x = 0.0
-		vel.z = 0.0
+			vel = _patrol_velocity()
 
 	velocity = vel
-	_apply_gravity(delta)
 	move_and_slide()
 
 
-func _patrol(_delta: float, vel: Vector3) -> void:
+func _patrol_velocity() -> Vector2:
 	var to_home := _home - global_position
-	to_home.y = 0.0
-	if to_home.length() > 1.0:
-		var dir := to_home.normalized()
-		vel.x = dir.x * trauma_data.move_speed * 0.4
-		vel.z = dir.z * trauma_data.move_speed * 0.4
-	else:
-		vel.x = 0.0
-		vel.z = 0.0
-	velocity = vel
-
-
-func _apply_gravity(delta: float) -> void:
-	var vel := velocity
-	if is_on_floor():
-		vel.y = -0.5
-	else:
-		vel.y -= gravity * delta
-	velocity = vel
+	if to_home.length() > 4.0:
+		return to_home.normalized() * trauma_data.move_speed * 0.4
+	return Vector2.ZERO
 
 
 func _perform_attack(target: Player) -> void:
@@ -136,11 +108,8 @@ func _perform_attack(target: Player) -> void:
 	if trauma_data.behavior == TraumaData.Behavior.SKITTISH:
 		# Skittish traumas strike and immediately put distance back between
 		# themselves and the player, instead of staying in a brawl.
-		var away := (global_position - target.global_position)
-		away.y = 0.0
-		away = away.normalized()
-		velocity.x = away.x * trauma_data.move_speed * 1.5
-		velocity.z = away.z * trauma_data.move_speed * 1.5
+		var away := (global_position - target.global_position).normalized()
+		velocity = away * trauma_data.move_speed * 1.5
 
 
 ## Common "damageable" interface.
@@ -165,6 +134,6 @@ func die() -> void:
 	set_physics_process(false)
 	hide()
 	for child in get_children():
-		if child is CollisionShape3D:
+		if child is CollisionShape2D:
 			child.set_deferred("disabled", true)
 	queue_free()

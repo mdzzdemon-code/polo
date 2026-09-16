@@ -1,36 +1,14 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=2 format=3]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
-radius = 0.3
-height = 4.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 26.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
-top_radius = 0.25
-bottom_radius = 0.35
-height = 4.0
+[node name="TreePlaceholder" type="StaticBody2D"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trunk"]
-albedo_color = Color(0.36, 0.25, 0.16, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
 
-[sub_resource type="SphereMesh" id="SphereMesh_1"]
-radius = 1.6
-height = 3.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_foliage"]
-albedo_color = Color(0.2, 0.5, 0.22, 1)
-
-[node name="TreePlaceholder" type="StaticBody3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-position = Vector3(0, 2, 0)
-shape = SubResource("CylinderShape3D_1")
-
-[node name="Trunk" type="MeshInstance3D" parent="."]
-position = Vector3(0, 2, 0)
-mesh = SubResource("CylinderMesh_1")
-surface_material_override/0 = SubResource("StandardMaterial3D_trunk")
-
-[node name="Foliage" type="MeshInstance3D" parent="."]
-position = Vector3(0, 4.4, 0)
-mesh = SubResource("SphereMesh_1")
-surface_material_override/0 = SubResource("StandardMaterial3D_foliage")
+[node name="Canopy" type="Polygon2D" parent="."]
+scale = Vector2(28, 28)
+color = Color(0.2, 0.5, 0.22, 1)
+polygon = PackedVector2Array(1, 0, 0.866, 0.5, 0.5, 0.866, 0, 1, -0.5, 0.866, -0.866, 0.5, -1, 0, -0.866, -0.5, -0.5, -0.866, 0, -1, 0.5, -0.866, 0.866, -0.5)

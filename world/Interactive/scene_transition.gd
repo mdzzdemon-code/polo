@@ -1,4 +1,4 @@
-extends Area3D
+extends Area2D
 class_name SceneTransition
 ## A trigger volume that swaps the active region when the player walks through it.
 

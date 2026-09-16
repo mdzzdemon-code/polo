@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 ## Flag-gated Trauma placement: nothing spawns until required_flags are met,
 ## so appearances stay tied to world/event state rather than being arbitrary
 ## (GDD §15 — "ils ne doivent donc pas apparaître arbitrairement partout").
@@ -25,7 +25,7 @@ func _check() -> void:
 
 
 func _spawn() -> void:
-	var trauma: Node3D = TRAUMA_SCENE.instantiate()
+	var trauma: Node2D = TRAUMA_SCENE.instantiate()
 	trauma.trauma_data = trauma_data
 	# Copy the LOCAL transform (spawner and trauma share the same parent) —
 	# global_position can't be read/written before the node is in the tree,

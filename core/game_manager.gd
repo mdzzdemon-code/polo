@@ -13,7 +13,7 @@ enum Mode { EXPLORATION, COMBAT, DIALOGUE, CUTSCENE, MENU }
 var current_mode: Mode = Mode.EXPLORATION
 var current_region_path: String = ""
 
-var world_container: Node3D
+var world_container: Node2D
 var player: Player
 
 
@@ -24,7 +24,7 @@ func set_mode(mode: Mode) -> void:
 	mode_changed.emit(mode)
 
 
-func register_world(container: Node3D, player_node: Player) -> void:
+func register_world(container: Node2D, player_node: Player) -> void:
 	world_container = container
 	player = player_node
 	player_registered.emit(player_node)
@@ -40,8 +40,8 @@ func change_region(scene_path: String, spawn_point: StringName = &"PlayerSpawn")
 	var region: Node = region_scene.instantiate()
 	world_container.add_child(region)
 	current_region_path = scene_path
-	var spawn: Node3D = region.get_node_or_null(String(spawn_point))
+	var spawn: Node2D = region.get_node_or_null(String(spawn_point))
 	if spawn and player:
 		player.global_position = spawn.global_position
-		player.rotation.y = spawn.rotation.y
+		player.get_node("BodyVisual").rotation = spawn.rotation
 	region_changed.emit(scene_path)

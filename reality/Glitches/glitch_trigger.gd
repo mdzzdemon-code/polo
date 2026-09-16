@@ -1,4 +1,4 @@
-extends Area3D
+extends Area2D
 class_name GlitchTrigger
 ## A subtle, mostly-invisible trigger volume: the player walking through it
 ## fires a glitch. Used for the opening forest's "did I really see that?" beats.

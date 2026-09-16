@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends CharacterBody2D
 class_name Player
 ## Root controller: owns health and wires together the component nodes
 ## (Movement, Interaction, Combat, Inventory, Keywords, Abilities, Stability).
@@ -17,7 +17,7 @@ var health: float
 @onready var keywords: Node = $Keywords
 @onready var abilities: Node = $Abilities
 @onready var stability: StabilityComponent = $Stability
-@onready var camera: Camera3D = $CameraRig/SpringArm/Camera3D
+@onready var camera: Camera2D = $Camera2D
 
 
 func _ready() -> void:

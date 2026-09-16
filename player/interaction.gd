@@ -4,10 +4,11 @@ extends Node
 
 signal focus_changed(interactable: Node)
 
-@export var interact_range: float = 3.0
+@export var interact_range: float = 120.0
 @export var interact_cone_dot: float = 0.4 # how forward-facing a target must be
 
-@onready var player: CharacterBody3D = get_parent()
+@onready var player: Player = get_parent()
+@onready var body_visual: Node2D = player.get_node("BodyVisual")
 
 var current_focus: Node = null
 var _was_key_down: bool = false
@@ -23,18 +24,15 @@ func _physics_process(_delta: float) -> void:
 
 	var best: Node = null
 	var best_dist := INF
+	var facing := Vector2.RIGHT.rotated(body_visual.rotation)
 	for interactable in get_tree().get_nodes_in_group("interactable"):
 		if not is_instance_valid(interactable):
 			continue
-		var to_target: Vector3 = interactable.global_position - player.global_position
+		var to_target: Vector2 = interactable.global_position - player.global_position
 		var dist := to_target.length()
 		if dist > interact_range:
 			continue
-		var flat := Vector3(to_target.x, 0.0, to_target.z).normalized()
-		# BodyMesh yaw follows movement.gd's atan2(x, z) convention.
-		var yaw: float = player.get_node("BodyMesh").rotation.y
-		var facing := Vector3(sin(yaw), 0.0, cos(yaw))
-		if flat.dot(facing) < interact_cone_dot and dist > 1.0:
+		if dist > 20.0 and to_target.normalized().dot(facing) < interact_cone_dot:
 			continue
 		if dist < best_dist:
 			best_dist = dist
